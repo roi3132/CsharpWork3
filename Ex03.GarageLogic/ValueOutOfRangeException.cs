@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
 
         public ValueOutOfRangeException(float i_MaxValue, float i_MinValue) : base
           (string.Format(@"An error occurred while trying to put a value not in the range.
-                            Please insert input between {0} to {1}", i_MinValue, i_MaxValue))
+                            Please insert input between {0} to {1}", i_MinValue, i_MaxValue)) /// not good
         {
             m_MaxValue = i_MaxValue;
             m_MinValue = i_MinValue;

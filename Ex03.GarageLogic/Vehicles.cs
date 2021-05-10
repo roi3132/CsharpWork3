@@ -11,6 +11,17 @@ namespace Ex03.GarageLogic
         private string m_ModelName;
         private string m_LicenseNumber;
         private float m_Energy;
-        private Wheels m_CollectionOfWheels;
+        private List<Wheels> m_ListOfWheels;
+        public List<Wheels> Wheels 
+        {
+            get { return m_ListOfWheels; }
+        }
+
+
+        public string LicenseNumber 
+        {
+            get { return m_LicenseNumber; }
+        }
+
     }
 }

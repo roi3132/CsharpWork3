@@ -6,10 +6,18 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class GasolineVehicles
+    class GasolineVehicles:Vehicles
     {
         private eFuelTypes m_FuelType;
+        public eFuelTypes FuelType 
+        {
+            get { return m_FuelType; }
+        }
         private float m_CurrentAmountOfFuel;
+        public float CurrentAmountOfFuel 
+        {
+            set { m_CurrentAmountOfFuel = value; }
+        }
         private float m_MaxAmountOfFuel;
 
         public void Refueling(float i_LitersToRefuel, eFuelTypes i_FuelType)
