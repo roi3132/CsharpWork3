@@ -6,34 +6,52 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class GasolineVehicles:Vehicles
+    public class GasolineVehicles :Vehicles
     {
+        const int k_NumberOfWheels = 4;
         private eFuelTypes m_FuelType;
-        public eFuelTypes FuelType 
+        private float m_CurrentAmountOfFuel;
+        private float m_MaxAmountOfFuel;
+
+        public GasolineVehicles(eFuelTypes i_FuelType, float i_CurrentAmountOfFuel,float i_MaxAmountOfFuel
+             , string i_ModelName, string i_LicenseNumber, float i_PercentageOfEnergyLeft)
+            : base(i_ModelName, i_LicenseNumber, i_PercentageOfEnergyLeft, k_NumberOfWheels) 
+        {
+            m_FuelType = i_FuelType;
+            m_CurrentAmountOfFuel = i_CurrentAmountOfFuel;
+            m_MaxAmountOfFuel = i_MaxAmountOfFuel;
+        }
+
+        public eFuelTypes FuelType
         {
             get { return m_FuelType; }
         }
-        private float m_CurrentAmountOfFuel;
-        public float CurrentAmountOfFuel 
+
+        public float CurrentAmountOfFuel
         {
             set { m_CurrentAmountOfFuel = value; }
         }
-        private float m_MaxAmountOfFuel;
 
         public void Refueling(float i_LitersToRefuel, eFuelTypes i_FuelType)
         {
-            if (i_LitersToRefuel + m_CurrentAmountOfFuel < m_CurrentAmountOfFuel ||
-                i_FuelType == m_FuelType)
+            if (i_LitersToRefuel + m_CurrentAmountOfFuel < m_MaxAmountOfFuel)
             {
-                m_CurrentAmountOfFuel += i_LitersToRefuel;
+                if (i_FuelType == m_FuelType)
+                {
+                    m_CurrentAmountOfFuel += i_LitersToRefuel;
+                }
+                else 
+                {
+                    throw new ArgumentException("The fuel type does not match");
+                }
             }
             else
             {
-                throw new ValueOutOfRangeException(m_MaxAmountOfFuel,GetMinAmountFuel());
+                throw new ValueOutOfRangeException(0, GetMaxAmountToFill());
             }      
         }
 
-        public float GetMinAmountFuel() 
+        public float GetMaxAmountToFill() 
         {
             return m_MaxAmountOfFuel - m_CurrentAmountOfFuel;
         }
@@ -46,6 +64,10 @@ namespace Ex03.GarageLogic
             Octan98
         }
 
-
+        public override string ToString()
+        {
+            return base.ToString() + string.Format("Fuel type:{0} Current amount of fuel:{1} Max amount of fuel:{2}",
+                m_FuelType,m_CurrentAmountOfFuel,m_MaxAmountOfFuel);
+        }
     }
 }

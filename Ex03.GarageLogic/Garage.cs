@@ -1,43 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using static Ex03.GarageLogic.GasolineVehicles;
 
 namespace Ex03.GarageLogic
 {
     class Garage
     {
-        private string m_OwnerName;
-        private string m_OwnerPhone;
-        private eVehicleCondition m_Condition;
-        private Dictionary<string, Vehicles> m_VechilesData;
-        private Dictionary<string, eVehicleCondition> m_VechilesStatus;
+        private readonly Dictionary<string, List<object>> m_VechilesData;
 
+        public Garage()
+        {
+            m_VechilesData = new Dictionary<string, List<object>>();
+        }
 
-        public bool PutCar(Vehicles i_Vehicles)
+        public bool PutCar(Vehicles i_Vehicles, string i_name, string i_Phone)
         {
             bool carIsInGarage = false;
             if (m_VechilesData.ContainsKey(i_Vehicles.LicenseNumber))
             {
-                m_VechilesStatus[i_Vehicles.LicenseNumber] = eVehicleCondition.InRepair;
+                m_VechilesData[i_Vehicles.LicenseNumber][1] = eVehicleCondition.InRepair;
                 carIsInGarage = true;
             }
             else
             {
-                m_VechilesStatus.Add(i_Vehicles.LicenseNumber, eVehicleCondition.InRepair);
-                m_VechilesData.Add(i_Vehicles.LicenseNumber, i_Vehicles);
+                List<object> data = new List<object>() { i_Vehicles, eVehicleCondition.InRepair, i_name, i_Phone };
+                m_VechilesData.Add(i_Vehicles.LicenseNumber, data);
             }
             return !carIsInGarage;
         }
 
         public StringBuilder GetVehiclesList(eVehicleCondition i_FilterByCondition)
         {
-            StringBuilder vehiclesList = new StringBuilder(string.Empty);
-            foreach (KeyValuePair<string, eVehicleCondition> vehicle in m_VechilesStatus)
+            StringBuilder vehiclesList = new StringBuilder();
+            foreach (KeyValuePair<string, List<object>> vehicle in m_VechilesData)
             {
-                if (vehicle.Value == i_FilterByCondition)
+                if ((eVehicleCondition)vehicle.Value[1] == i_FilterByCondition)
                 {
                     vehiclesList.Append(vehicle.Key + Environment.NewLine);
                 }
@@ -47,20 +44,20 @@ namespace Ex03.GarageLogic
 
         public StringBuilder GetVehiclesList()
         {
-            StringBuilder vehiclesList = new StringBuilder(string.Empty);
-            foreach (KeyValuePair<string, eVehicleCondition> vehicle in m_VechilesStatus)
+            StringBuilder NumberLicenseList = new StringBuilder(string.Empty);
+            foreach (KeyValuePair<string, List<object>> vehicle in m_VechilesData)
             {
-                vehiclesList.Append(vehicle.Key + Environment.NewLine);
+                NumberLicenseList.Append(vehicle.Key + Environment.NewLine);
             }
-            return vehiclesList;
+            return NumberLicenseList;
         }
 
         public bool Update(string i_NumberLicense, eVehicleCondition i_Condition)
         {
             bool vehiclelExsist = true;
-            if (m_VechilesStatus.ContainsKey(i_NumberLicense))
+            if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                m_VechilesStatus[i_NumberLicense] = i_Condition;
+                m_VechilesData[i_NumberLicense][1] = i_Condition;
             }
             else
             {
@@ -74,8 +71,8 @@ namespace Ex03.GarageLogic
             bool vehiclelExsist = true;
             if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                List<Wheels> wheels = m_VechilesData[i_NumberLicense].Wheels;
-                foreach (Wheels wheel in wheels)
+                Vehicles v = m_VechilesData[i_NumberLicense][0] as Vehicles;
+                foreach (Wheels wheel in v.Wheels)
                 {
                     float pressureToFill = wheel.GetMinAirPressure();
                     wheel.InflatingWheel(pressureToFill);
@@ -88,18 +85,13 @@ namespace Ex03.GarageLogic
             return vehiclelExsist;
         }
 
-        public bool RefuelVehicle(string i_NumberLicense, eFuelTypes i_FuelTypes, float i_GasolineToFill)
+        public bool RefuelVehicle(string i_NumberLicense, GasolineVehicles.eFuelTypes i_FuelTypes, float i_GasolineToFill)
         {
             bool vehiclelExsist = true;
             if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                if(m_VechilesData[i_NumberLicense])
-                List<Wheels> wheels = m_VechilesData[i_NumberLicense].Wheels;
-                foreach (Wheels wheel in wheels)
-                {
-                    float pressureToFill = wheel.GetMinAirPressure();
-                    wheel.InflatingWheel(pressureToFill);
-                }
+                GasolineVehicles currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as GasolineVehicles;
+                currentGasolineVehicles.Refueling(i_GasolineToFill, i_FuelTypes);
             }
             else
             {
@@ -108,14 +100,31 @@ namespace Ex03.GarageLogic
             return vehiclelExsist;
         }
 
-        public bool ChargeVehicle(string, int)
+        public bool ChargeVehicle(string i_NumberLicense, int i_MinutesToCharge)
         {
-
+            bool vehiclelExsist = true;
+            if (m_VechilesData.ContainsKey(i_NumberLicense))
+            {
+                ElectricVehicles currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as ElectricVehicles;
+                currentGasolineVehicles.BatteryCharging(i_MinutesToCharge);
+            }
+            else
+            {
+                vehiclelExsist = false;
+            }
+            return vehiclelExsist;
         }
 
-        public string GetVehicleData(string)
+        public StringBuilder GetVehicleData(string i_NumberLicense)
         {
-
+            StringBuilder vehicleData = new StringBuilder();
+            // if key not found throw KeyNotFoundException.
+            List<object> data = m_VechilesData[i_NumberLicense];
+            foreach (object o in data) 
+            {
+                vehicleData.Append(o.ToString()); 
+            }
+            return vehicleData;
         }
 
         public enum eVehicleCondition

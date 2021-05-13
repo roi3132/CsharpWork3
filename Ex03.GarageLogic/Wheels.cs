@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Wheels
+    public class Wheels
     {
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
         private float m_MaxAirPressure;
+
+        public Wheels(string i_ManufacturerName,float i_CurrentAirPressure, float i_MaxAirPressure) 
+        {
+            m_ManufacturerName = i_ManufacturerName;
+            m_CurrentAirPressure = i_CurrentAirPressure;
+            m_MaxAirPressure = i_MaxAirPressure;
+        }
 
         public void InflatingWheel(float i_AirPressure)
         {
@@ -26,6 +33,19 @@ namespace Ex03.GarageLogic
         public float GetMinAirPressure() 
         {
             return m_MaxAirPressure - m_CurrentAirPressure;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Manufacturer name:{0} Current air pressure:{1} Max air pressure:{2}"
+                ,m_ManufacturerName,m_CurrentAirPressure,m_MaxAirPressure); 
+        }
+
+        public enum eMaxAirPressure 
+        {
+            Motorcycle = 30,
+            Car = 32,
+            Truck = 26
         }
     }
 }
