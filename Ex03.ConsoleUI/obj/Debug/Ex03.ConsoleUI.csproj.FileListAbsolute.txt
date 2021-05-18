@@ -11,3 +11,12 @@ C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימו
 C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימודים\קורסים\שנה ג\סמסטר ב\C# .net\3\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CopyComplete
 C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימודים\קורסים\שנה ג\סמסטר ב\C# .net\3\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.exe
 C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימודים\קורסים\שנה ג\סמסטר ב\C# .net\3\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.pdb
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe.config
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.exe
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\bin\Debug\Ex03.ConsoleUI.pdb
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\bin\Debug\Ex03.GarageLogic.dll
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\bin\Debug\Ex03.GarageLogic.pdb
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\bin\Debug\Ex03.GarageLogic.dll.config
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CopyComplete
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.exe
+C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.pdb

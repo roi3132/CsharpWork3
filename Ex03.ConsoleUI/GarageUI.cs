@@ -252,20 +252,19 @@ Please select gasoline type:
                 try
                 {
                     userInput = int.Parse(userInputStr);
+                    if (userInput <= i_UpperRange && userInput >= i_LowerRange)
+                    {
+                        invalidChoice = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. plese enter number acoording to the menu options.");
+                    }
                 }
                 catch (FormatException e)
                 {
                     Console.WriteLine("invalide input. please enter only numbers and try again.");
-                }
-                if ((userInput <= i_UpperRange || userInput >= i_LowerRange))
-                {
-                    invalidChoice = false;
-
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. plese enter number acoording to the menu options.");
-                }
+                } 
             }
             return userInput;
         }
@@ -282,9 +281,13 @@ Please select gasoline type:
                 {
                     userInput = int.Parse(userInputStr);
                 }
+                catch (ArgumentNullException ane) 
+                {
+                    Console.WriteLine("You did not type anything. Please try again");
+                }
                 catch (FormatException fe)
                 {
-                    Console.WriteLine("invalide input. please enter only numbers and try again");
+                    Console.WriteLine("Invalide input. please enter only numbers and try again");
                 }
             }
             return userInput;
