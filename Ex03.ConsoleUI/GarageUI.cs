@@ -38,6 +38,14 @@ namespace Ex03.ConsoleUI
                 {
                     case (int)eUserChoice.InsertNewVehicle:
                         {
+                            Console.WriteLine(@"
+Please select vehicle type (1-3):
+1) Car 
+2) Motorcycle 
+3) Truck");
+
+                            int vehicleType = GetChoiceFromUser(1, 3);
+
                             Console.WriteLine("Please enter Owner name:");
                             string ownerName = Console.ReadLine();
                             Console.WriteLine("Please enter Owner phone:");
@@ -48,13 +56,7 @@ namespace Ex03.ConsoleUI
                             string licenseNumber = Console.ReadLine();
                             Console.WriteLine("Please enter wheel manufacturer name:");
                             string manufacturerName = Console.ReadLine();
-                            Console.WriteLine(@"
-Please select vehicle type (1-3):
-1) Car 
-2) Motorcycle 
-3) Truck");
 
-                            int vehicleType = GetChoiceFromUser(1, 3);
                             switch (vehicleType)
                             {
                                 case (int)Vehicles.eVehicleType.Car:
@@ -100,7 +102,7 @@ Please select License type:
 4) BB");
                                         int licenseType = GetChoiceFromUser(1, 4);
                                         Console.WriteLine("Please enter engine capacity:");
-                                        int engineCapacity = int.Parse(Console.ReadLine());
+                                        int engineCapacity = GetNumberFromUser();
                                         Motorcycle motorcycle = new Motorcycle(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
                                         motorcycle.LicenseType = (Motorcycle.eLicenseType)licenseType;
                                         motorcycle.EngineCapacity = engineCapacity;
@@ -236,7 +238,8 @@ Please select gasoline type:
 4) Inflate the wheels to max.
 5) Refuel vehicle.
 6) Charge an electric vehicle.
-7) Display all vehicle datas.");
+7) Display all vehicle datas.
+8) exit.");
         }
         public int GetChoiceFromUser(int i_LowerRange, int i_UpperRange)
         {
@@ -250,11 +253,9 @@ Please select gasoline type:
                 {
                     userInput = int.Parse(userInputStr);
                 }
-                catch (Exception e)
+                catch (FormatException e)
                 {
-                    Console.WriteLine("Invalid input. Please try agin.");
-                    userInputStr = Console.ReadLine();
-                    userInput = int.Parse(userInputStr);
+                    Console.WriteLine("invalide input. please enter only numbers and try again.");
                 }
                 if ((userInput <= i_UpperRange || userInput >= i_LowerRange))
                 {
@@ -263,11 +264,31 @@ Please select gasoline type:
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please try agin.");
+                    Console.WriteLine("Invalid input. plese enter number acoording to the menu options.");
                 }
             }
             return userInput;
         }
 
+        public int GetNumberFromUser()
+        {
+            bool invalidChoice = true;
+            string userInputStr = string.Empty;
+            int userInput = -1;
+            while (invalidChoice)
+            {
+                userInputStr = Console.ReadLine();
+                try
+                {
+                    userInput = int.Parse(userInputStr);
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine("invalide input. please enter only numbers and try again");
+                }
+            }
+            return userInput;
+        }
     }
 }
+
