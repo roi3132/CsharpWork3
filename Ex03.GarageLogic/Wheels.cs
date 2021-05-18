@@ -12,10 +12,10 @@ namespace Ex03.GarageLogic
         private float m_CurrentAirPressure;
         private float m_MaxAirPressure;
 
-        public Wheels(string i_ManufacturerName,float i_CurrentAirPressure, float i_MaxAirPressure) 
+        public Wheels(string i_ManufacturerName, float i_MaxAirPressure) 
         {
+            m_CurrentAirPressure = 0;
             m_ManufacturerName = i_ManufacturerName;
-            m_CurrentAirPressure = i_CurrentAirPressure;
             m_MaxAirPressure = i_MaxAirPressure;
         }
 
@@ -41,11 +41,6 @@ namespace Ex03.GarageLogic
                 ,m_ManufacturerName,m_CurrentAirPressure,m_MaxAirPressure); 
         }
 
-        public enum eMaxAirPressure 
-        {
-            Motorcycle = 30,
-            Car = 32,
-            Truck = 26
-        }
+
     }
 }

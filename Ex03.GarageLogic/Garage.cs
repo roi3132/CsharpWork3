@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
             return NumberLicenseList;
         }
 
-        public bool Update(string i_NumberLicense, eVehicleCondition i_Condition)
+        public bool UpdateCondition(string i_NumberLicense, eVehicleCondition i_Condition)
         {
             bool vehiclelExsist = true;
             if (m_VechilesData.ContainsKey(i_NumberLicense))
@@ -85,12 +85,13 @@ namespace Ex03.GarageLogic
             return vehiclelExsist;
         }
 
-        public bool RefuelVehicle(string i_NumberLicense, GasolineVehicles.eFuelTypes i_FuelTypes, float i_GasolineToFill)
+        public bool RefuelVehicle(string i_NumberLicense, GasolineEngine.eFuelTypes i_FuelTypes, float i_GasolineToFill)
         {
             bool vehiclelExsist = true;
+           
             if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                GasolineVehicles currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as GasolineVehicles;
+                GasolineEngine currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as GasolineEngine;
                 currentGasolineVehicles.Refueling(i_GasolineToFill, i_FuelTypes);
             }
             else
@@ -105,7 +106,7 @@ namespace Ex03.GarageLogic
             bool vehiclelExsist = true;
             if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                ElectricVehicles currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as ElectricVehicles;
+                ElectricEngine currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as ElectricEngine;
                 currentGasolineVehicles.BatteryCharging(i_MinutesToCharge);
             }
             else

@@ -8,16 +8,36 @@ namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicles
     {
+        private const GasolineEngine.eFuelTypes k_FuelType = GasolineEngine.eFuelTypes.Octan98;
+        private const float k_MaxAmountOfFuel = 6;
+        private const float K_MaxBatteryTime = 1.8f;
+        private const int k_MaxAirPressure = 30;
         private const int k_NumberOfWheels = 2;
         private eLicenseType m_LicenseType;
         private int m_EngineCapacity;
 
-        public Motorcycle(eLicenseType i_LicenseType, int i_EngineCapacity
-            , string i_ModelName, string i_LicenseNumber, float i_PercentageOfEnergyLeft)
-            : base(i_ModelName, i_LicenseNumber, i_PercentageOfEnergyLeft, k_NumberOfWheels)
+        public eLicenseType LicenseType { get; set; }
+        public int EngineCapacity { get; set; }
+
+        public Motorcycle(string i_ModelName, string i_LicenseNumber, string i_ManufacturerName
+            , Engine.eEngineType i_EngineType)
+                : base(i_ModelName, i_LicenseNumber, i_EngineType)
         {
-            m_LicenseType = i_LicenseType;
-            m_EngineCapacity = i_EngineCapacity;
+            m_ModelName = i_ModelName;
+            m_LicenseNumber = i_LicenseNumber;
+            if (i_EngineType == Engine.eEngineType.Gasolin)
+            {
+                m_Engine = new GasolineEngine(k_FuelType, k_MaxAmountOfFuel);
+            }
+            else if (i_EngineType == Engine.eEngineType.Electric)
+            {
+                m_Engine = new ElectricEngine(K_MaxBatteryTime);
+            }
+            m_ListOfWheels = new Wheels[k_NumberOfWheels];
+            for (int i = 0; i < k_NumberOfWheels; i++)
+            {
+                m_ListOfWheels[i] = new Wheels(i_ManufacturerName, k_MaxAirPressure);
+            }
         }
 
         public enum eLicenseType

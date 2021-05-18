@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricVehicles :Vehicles
+    public class ElectricEngine: Engine
     {
-        const int k_NumberOfWheels = 4;
         private float m_RemainingBatteryTime;
         private float m_MaxBatteryTime;
 
-        public ElectricVehicles(float i_RemainingBatteryTime, float i_MaxBatteryTime
-             , string i_ModelName, string i_LicenseNumber, float i_PercentageOfEnergyLeft)
-            : base(i_ModelName, i_LicenseNumber, i_PercentageOfEnergyLeft)
+        public ElectricEngine( float i_MaxBatteryTime)
         {
             m_MaxBatteryTime = i_MaxBatteryTime;
-            m_RemainingBatteryTime = i_RemainingBatteryTime;
+            m_RemainingBatteryTime = 0;
         }
 
         public void BatteryCharging(float i_TimeToCharge)
