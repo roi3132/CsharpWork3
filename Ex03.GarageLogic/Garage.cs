@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Garage
+    public class Garage
     {
         private readonly Dictionary<string, List<object>> m_VechilesData;
 
@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
             m_VechilesData = new Dictionary<string, List<object>>();
         }
 
-        public bool PutCar(Vehicles i_Vehicles, string i_name, string i_Phone)
+        public bool InsertNewVehicle(Vehicles i_Vehicles, string i_OwnerName, string i_Phone)
         {
             bool carIsInGarage = false;
             if (m_VechilesData.ContainsKey(i_Vehicles.LicenseNumber))
@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                List<object> data = new List<object>() { i_Vehicles, eVehicleCondition.InRepair, i_name, i_Phone };
+                List<object> data = new List<object>() { i_Vehicles, eVehicleCondition.InRepair, i_OwnerName, i_Phone };
                 m_VechilesData.Add(i_Vehicles.LicenseNumber, data);
             }
             return !carIsInGarage;
