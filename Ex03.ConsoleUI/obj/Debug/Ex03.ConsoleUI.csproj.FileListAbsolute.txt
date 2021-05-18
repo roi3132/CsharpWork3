@@ -1,2 +1,4 @@
 C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csprojAssemblyReference.cache
 C:\Users\oriro\Documents\GitHub\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימודים\קורסים\שנה ג\סמסטר ב\C# .net\3\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csprojAssemblyReference.cache
+C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימודים\קורסים\שנה ג\סמסטר ב\C# .net\3\CsharpWork3\Ex03.ConsoleUI\obj\Debug\Ex03.ConsoleUI.csproj.CoreCompileInputs.cache

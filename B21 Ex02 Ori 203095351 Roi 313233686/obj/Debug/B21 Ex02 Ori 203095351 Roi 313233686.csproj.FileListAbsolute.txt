@@ -1,0 +1,2 @@
+C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימודים\קורסים\שנה ג\סמסטר ב\C# .net\3\CsharpWork3\B21 Ex02 Ori 203095351 Roi 313233686\obj\Debug\B21 Ex02 Ori 203095351 Roi 313233686.csprojAssemblyReference.cache
+C:\Users\roial\Google Drive\גיבוי לענן משותף מחשבים\לימודים\קורסים\שנה ג\סמסטר ב\C# .net\3\CsharpWork3\B21 Ex02 Ori 203095351 Roi 313233686\obj\Debug\B21 Ex02 Ori 203095351 Roi 313233686.csproj.CoreCompileInputs.cache
