@@ -119,11 +119,18 @@ namespace Ex03.GarageLogic
         public StringBuilder GetVehicleData(string i_NumberLicense)
         {
             StringBuilder vehicleData = new StringBuilder();
-            // if key not found throw KeyNotFoundException.
-            List<object> data = m_VechilesData[i_NumberLicense];
-            foreach (object o in data) 
+            // if key not found throw KeyNotFoundException
+            try
             {
-                vehicleData.Append(o.ToString()); 
+                List<object> data = m_VechilesData[i_NumberLicense];
+                foreach (object o in data)
+                {
+                    vehicleData.Append(o.ToString());
+                }
+            }
+            catch(KeyNotFoundException knfe)
+            {
+                throw new ArgumentException("licence plate not found", i_NumberLicense, knfe);
             }
             return vehicleData;
         }

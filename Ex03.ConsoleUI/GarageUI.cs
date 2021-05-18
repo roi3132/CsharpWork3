@@ -198,9 +198,22 @@ Please select gasoline type:
                         }
                     case (int)eUserChoice.DisplayFullVehicleData:
                         {
-                            Console.WriteLine("Please enter number license:");
-                            string licenseNumber = Console.ReadLine();
-                            Console.WriteLine(m_Garage.GetVehicleData(licenseNumber));
+                            bool  keepTryGetValidInput = true;
+                            string licenseNumber = string.Empty;
+                            while (keepTryGetValidInput)
+                            {
+                                Console.WriteLine("Please enter number license:");
+                                licenseNumber = Console.ReadLine();
+                                try
+                                {
+                                    Console.WriteLine(m_Garage.GetVehicleData(licenseNumber));
+                                }
+                                catch (ArgumentException ae)
+                                {
+                                    keepTryGetValidInput = true;
+                                    Console.WriteLine("licence number not found, please try again with other number");
+                                }
+                            }
                             break;
                         }
                     case (int)eUserChoice.Exit:
