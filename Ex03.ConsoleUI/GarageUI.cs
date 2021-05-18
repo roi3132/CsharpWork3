@@ -7,11 +7,13 @@ namespace Ex03.ConsoleUI
 {
     public class UserInterface
     {
+        private readonly Service m_Service;
         private bool m_Run;
         private readonly Garage m_Garage;
 
         public UserInterface()
         {
+            m_Service = new Service();
             m_Run = false;
             m_Garage = new Garage();
         }
@@ -32,77 +34,37 @@ namespace Ex03.ConsoleUI
         {
             do
             {
-                DisplayMenu();
-                int userChoose = GetChoiceFromUser(1, 7);
+                m_Service.GetDisplayMenu();
+                int userChoose = m_Service.GetChoiceFromUser(1, 7);
                 switch (userChoose)
                 {
                     case (int)eUserChoice.InsertNewVehicle:
                         {
-                            Console.WriteLine(@"
-Please select vehicle type (1-3):
-1) Car 
-2) Motorcycle 
-3) Truck");
-
-                            int vehicleType = GetChoiceFromUser(1, 3);
-
-                            Console.WriteLine("Please enter Owner name:");
-                            string ownerName = Console.ReadLine();
-                            Console.WriteLine("Please enter Owner phone:");
-                            string ownerphone = Console.ReadLine();
-                            Console.WriteLine("Please enter model name:");
-                            string modelName = Console.ReadLine();
-                            Console.WriteLine("Please enter number license:");
-                            string licenseNumber = Console.ReadLine();
-                            Console.WriteLine("Please enter wheel manufacturer name:");
-                            string manufacturerName = Console.ReadLine();
-
+                            int vehicleType = m_Service.GetVehicleType();
+                            string ownerName = m_Service.GetOwnerName();
+                            string ownerPhone = m_Service.GetOwnerPhone();
+                            string modelName = m_Service.GetModelName();
+                            string licenseNumber = m_Service.GetLicenseNumber();
+                            string manufacturerName = m_Service.GetManufacturerName();
                             switch (vehicleType)
                             {
                                 case (int)Vehicles.eVehicleType.Car:
                                     {
-                                        Console.WriteLine(@"
-Please select engine type:
-1) Gasolin
-2) Electric");
-                                        int engineType = GetChoiceFromUser(1, 2);
-                                        Console.WriteLine(@"
-Please select type of color:
-1) Red
-2) Silver
-3) White
-4) Black");
-                                        int color = GetChoiceFromUser(1, 4);
-                                        Console.WriteLine(@"
-Please select number of doors:
-1) Two
-2) Tree
-3) Four
-4) Five");
-
-                                        int numOfDoors = GetChoiceFromUser(1, 4);
+                                        int engineType = m_Service.GetEngineType();
+                                        int color = m_Service.GetColorType();
+                                        int numOfDoors = m_Service.GetNumOfDoors();
                                         Car car = new Car(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
                                         car.Color = (Car.eColorsType)color;
                                         car.NumOfDoors = (Car.eDoorsType)numOfDoors;
-                                        m_Garage.InsertNewVehicle(car, ownerName, ownerphone);
+                                        m_Garage.InsertNewVehicle(car, ownerName, ownerPhone);
                                         break;
                                     }
                                 case (int)Vehicles.eVehicleType.Motorcycle:
                                     {
-                                        Console.WriteLine(@"
-Please select engine type:
-1) Gasolin
-2) Electric");
-                                        int engineType = GetChoiceFromUser(1, 2);
-                                        Console.WriteLine(@"
-Please select License type:
-1) A1
-2) B1
-3) AA
-4) BB");
-                                        int licenseType = GetChoiceFromUser(1, 4);
-                                        Console.WriteLine("Please enter engine capacity:");
-                                        int engineCapacity = GetNumberFromUser();
+
+                                        int engineType = m_Service.GetEngineType();
+                                        int licenseType = m_Service.GetLicenseType();
+                                        int engineCapacity = m_Service.GetEngineCapacity();
                                         Motorcycle motorcycle = new Motorcycle(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
                                         motorcycle.LicenseType = (Motorcycle.eLicenseType)licenseType;
                                         motorcycle.EngineCapacity = engineCapacity;
@@ -110,17 +72,8 @@ Please select License type:
                                     }
                                 case (int)Vehicles.eVehicleType.Truck:
                                     {
-                                        Console.WriteLine(@"
-Please select if Is Driving Hazardous Substances:
-1) Yes
-2) No");
-                                        bool isDrivingHazardousSubstances = false;
-                                        if (GetChoiceFromUser(1, 2) == 1)
-                                        {
-                                            isDrivingHazardousSubstances = true;
-                                        }
-                                        Console.WriteLine("Please enter maximum Carrying Weight:");
-                                        float maxCarryingWeight = float.Parse(Console.ReadLine());
+                                        bool isDrivingHazardousSubstances = m_Service.GetIsDrivingHazardousSubstances();
+                                        float maxCarryingWeight = m_Service.GetMaxCarryingWeight();
                                         Truck truck = new Truck(modelName, licenseNumber, manufacturerName, Engine.eEngineType.Gasolin);
                                         truck.IsDrivingHazardousSubstances = isDrivingHazardousSubstances;
                                         truck.MaxCarryingWeight = maxCarryingWeight;
@@ -131,19 +84,10 @@ Please select if Is Driving Hazardous Substances:
                         }
                     case (int)eUserChoice.DisplayLicenseNumbers:
                         {
-                            Console.WriteLine(@"
-You want to filter the results by the condition of the vehicle in garage?
-1) Yes
-2) No");
-                            int hasFiltering = GetChoiceFromUser(1, 2);
+                            int hasFiltering = m_Service.GetHasFiltering();
                             if (hasFiltering == 1)
                             {
-                                Console.WriteLine(@"
-Condition:
-1) in repair
-2) Fixed 
-3) Paid");
-                                int filter = GetChoiceFromUser(1, 3);
+                                int filter = m_Service.GetCondition();
                                 Console.WriteLine(m_Garage.GetVehiclesList((Garage.eVehicleCondition)filter));
                             }
                             else
@@ -154,53 +98,37 @@ Condition:
                         }
                     case (int)eUserChoice.SetVehicleStatus:
                         {
-                            Console.WriteLine("Please enter number license:");
-                            string licenseNumber = Console.ReadLine();
-                            Console.WriteLine(@"
-Change the condition of the vehicle to:
-1) in repair
-2) Fixed 
-3) Paid");
-                            int condition = GetChoiceFromUser(1, 3);
+
+                            string licenseNumber = m_Service.GetLicenseNumber();
+                            int condition = m_Service.GetCondition();
                             m_Garage.UpdateCondition(licenseNumber, (Garage.eVehicleCondition)condition); // exeption
                             break;
                         }
                     case (int)eUserChoice.InflateWheels:
                         {
-                            Console.WriteLine("Please enter number license:");
-                            string licenseNumber = Console.ReadLine();
+                            string licenseNumber = m_Service.GetLicenseNumber();
                             m_Garage.InflateWheel(licenseNumber); //exeption
                             break;
                         }
                     case (int)eUserChoice.FillGasolin:
                         {
-                            Console.WriteLine("Please enter number license:");
-                            string licenseNumber = Console.ReadLine();
-                            Console.WriteLine("Please enter the amount of gasoline:");
-                            float gasoilneAmount = float.Parse(Console.ReadLine());
-                            Console.WriteLine(@"
-Please select gasoline type:
-1) Soler 
-2) Octan95
-3) Octan96
-4) Octan98");
-                            int gasolineType = GetChoiceFromUser(1, 4);
+                            string licenseNumber = m_Service.GetLicenseNumber();
+                            float gasoilneAmount = m_Service.GetGasoilneAmount();
+                            int gasolineType = m_Service.GetGasolineType();
                             m_Garage.RefuelVehicle(licenseNumber, (GasolineEngine.eFuelTypes)gasolineType,
-                                gasoilneAmount); //exeption
+                               gasoilneAmount); //exeption
                             break;
                         }
                     case (int)eUserChoice.ChargeBattery:
                         {
-                            Console.WriteLine("Please enter number license:");
-                            string licenseNumber = Console.ReadLine();
-                            Console.WriteLine("Please enter the amount of Minutes to charge:");
-                            int minutesToCharge = int.Parse(Console.ReadLine());
+                            string licenseNumber = m_Service.GetLicenseNumber();
+                            int minutesToCharge = m_Service.GetMinutesToCharge();
                             m_Garage.ChargeVehicle(licenseNumber, minutesToCharge); //exeption
                             break;
                         }
                     case (int)eUserChoice.DisplayFullVehicleData:
                         {
-                            bool  keepTryGetValidInput = true;
+                            bool keepTryGetValidInput = true;
                             string licenseNumber = string.Empty;
                             while (keepTryGetValidInput)
                             {
@@ -225,72 +153,6 @@ Please select gasoline type:
                         }
                 }
             } while (m_Run);
-        }
-
-
-        public void DisplayMenu()
-        {
-            Console.WriteLine(
-    @"Choose your option:(1-7)
-1) Put new vehicle.
-2) Display numbers license.
-3) Setting the vehicle condition.
-4) Inflate the wheels to max.
-5) Refuel vehicle.
-6) Charge an electric vehicle.
-7) Display all vehicle datas.
-8) exit.");
-        }
-        public int GetChoiceFromUser(int i_LowerRange, int i_UpperRange)
-        {
-            bool invalidChoice = true;
-            string userInputStr = string.Empty;
-            int userInput = -1;
-            while (invalidChoice)
-            {
-                userInputStr = Console.ReadLine();
-                try
-                {
-                    userInput = int.Parse(userInputStr);
-                    if (userInput <= i_UpperRange && userInput >= i_LowerRange)
-                    {
-                        invalidChoice = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. plese enter number acoording to the menu options.");
-                    }
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("invalide input. please enter only numbers and try again.");
-                } 
-            }
-            return userInput;
-        }
-
-        public int GetNumberFromUser()
-        {
-            bool invalidChoice = true;
-            string userInputStr = string.Empty;
-            int userInput = -1;
-            while (invalidChoice)
-            {
-                userInputStr = Console.ReadLine();
-                try
-                {
-                    userInput = int.Parse(userInputStr);
-                }
-                catch (ArgumentNullException ane) 
-                {
-                    Console.WriteLine("You did not type anything. Please try again");
-                }
-                catch (FormatException fe)
-                {
-                    Console.WriteLine("Invalide input. please enter only numbers and try again");
-                }
-            }
-            return userInput;
         }
     }
 }
