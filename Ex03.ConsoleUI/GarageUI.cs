@@ -33,9 +33,7 @@ namespace Ex03.ConsoleUI
             do
             {
                 DisplayMenu();
-                string userChooseStr = Console.ReadLine();
-                int userChoose; ;
-                Enum.TryParse(userChooseStr, out userChoose);
+                int userChoose = GetChoiceFromUser(1, 7);
                 switch (userChoose)
                 {
                     case (int)eUserChoice.InsertNewVehicle:
@@ -245,7 +243,7 @@ Please select gasoline type:
                     userInputStr = Console.ReadLine();
                     userInput = int.Parse(userInputStr);
                 }
-                if (!(userInput <= i_UpperRange || userInput >= i_LowerRange))
+                if ((userInput <= i_UpperRange || userInput >= i_LowerRange))
                 {
                     invalidChoice = false;
 
