@@ -40,13 +40,14 @@ namespace Ex03.ConsoleUI
                 {
                     case (int)eUserChoice.InsertNewVehicle:
                         {
-                            Console.Clear();
                             int vehicleType = m_Service.GetVehicleType();
                             string ownerName = m_Service.GetOwnerName();
                             string ownerPhone = m_Service.GetOwnerPhone();
                             string modelName = m_Service.GetModelName();
                             string licenseNumber = m_Service.GetLicenseNumber();
                             string manufacturerName = m_Service.GetManufacturerName();
+
+                            Console.Clear();
                             switch (vehicleType)
                             {
                                 case (int)Vehicles.eVehicleType.Car:
@@ -54,6 +55,7 @@ namespace Ex03.ConsoleUI
                                         int engineType = m_Service.GetEngineType();
                                         int color = m_Service.GetColorType();
                                         int numOfDoors = m_Service.GetNumOfDoors();
+
                                         Car car = new Car(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
                                         car.Color = (Car.eColorsType)color;
                                         car.NumOfDoors = (Car.eDoorsType)numOfDoors;
@@ -66,6 +68,7 @@ namespace Ex03.ConsoleUI
                                         int engineType = m_Service.GetEngineType();
                                         int licenseType = m_Service.GetLicenseType();
                                         int engineCapacity = m_Service.GetEngineCapacity();
+
                                         Motorcycle motorcycle = new Motorcycle(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
                                         motorcycle.LicenseType = (Motorcycle.eLicenseType)licenseType;
                                         motorcycle.EngineCapacity = engineCapacity;
@@ -76,6 +79,7 @@ namespace Ex03.ConsoleUI
                                     {
                                         bool isDrivingHazardousSubstances = m_Service.GetIsDrivingHazardousSubstances();
                                         float maxCarryingWeight = m_Service.GetMaxCarryingWeight();
+
                                         Truck truck = new Truck(modelName, licenseNumber, manufacturerName, Engine.eEngineType.Gasolin);
                                         truck.IsDrivingHazardousSubstances = isDrivingHazardousSubstances;
                                         truck.MaxCarryingWeight = maxCarryingWeight;
@@ -89,6 +93,7 @@ namespace Ex03.ConsoleUI
                     case (int)eUserChoice.DisplayLicenseNumbers:
                         {
                             int hasFiltering = m_Service.GetHasFiltering();
+
                             if (hasFiltering == 1)
                             {
                                 int filter = m_Service.GetCondition();
@@ -153,17 +158,19 @@ namespace Ex03.ConsoleUI
                     case (int)eUserChoice.FillGasolin:
                         {
                             bool keepTryingToRefuel = true;
+                            string licenseNumber = string.Empty;
+                            float gasoilneAmount = float.MinValue;
+                            GasolineEngine.eFuelTypes gasolineType = 0;
 
                             Console.Clear();
                             while (keepTryingToRefuel)
                             {
                                 try
                                 {
-                                    string licenseNumber = m_Service.GetLicenseNumber();
-                                    float gasoilneAmount = m_Service.GetGasoilneAmount();
-                                    int gasolineType = m_Service.GetGasolineType();
-                                    m_Garage.RefuelVehicle(licenseNumber, (GasolineEngine.eFuelTypes)gasolineType,
-                                   gasoilneAmount);
+                                    licenseNumber = m_Service.GetLicenseNumber();
+                                    gasoilneAmount = m_Service.GetGasoilneAmount();
+                                    gasolineType = m_Service.GetGasolineType();
+                                    m_Garage.RefuelVehicle(licenseNumber, gasolineType, gasoilneAmount);
                                     keepTryingToRefuel = false;
                                 }
                                 catch(ArgumentException ae)
@@ -184,14 +191,16 @@ namespace Ex03.ConsoleUI
                     case (int)eUserChoice.ChargeBattery:
                         {
                             bool keepTryingToCharge = true;
+                            string licenseNumber = string.Empty;
+                            int minutesToCharge = 0;
 
                             Console.Clear();
                             while (keepTryingToCharge)
                             {
                                 try
                                 {
-                                    string licenseNumber = m_Service.GetLicenseNumber();
-                                    int minutesToCharge = m_Service.GetMinutesToCharge();
+                                    licenseNumber = m_Service.GetLicenseNumber();
+                                    minutesToCharge = m_Service.GetMinutesToCharge();
                                     m_Garage.ChargeVehicle(licenseNumber, minutesToCharge); 
                                     keepTryingToCharge = false;
                                 }
@@ -212,12 +221,15 @@ namespace Ex03.ConsoleUI
                         }
                     case (int)eUserChoice.DisplayFullVehicleData:
                         {
+                            string licenseNumber = string.Empty;
+                            string result = string.Empty;
+
                             Console.Clear();
                             try
                             {
-                                 string licenseNumber = m_Service.GetLicenseNumber();
-                                 StringBuilder result = m_Garage.GetVehicleData(licenseNumber);
-                                 Console.WriteLine(result.ToString());
+                                 licenseNumber = m_Service.GetLicenseNumber();
+                                 result = m_Garage.GetVehicleData(licenseNumber);
+                                 Console.WriteLine(result);
                             }
                             catch (KeyNotFoundException knfe)
                             {

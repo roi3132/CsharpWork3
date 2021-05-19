@@ -182,16 +182,17 @@ Please select if Is Driving Hazardous Substances:
             return isDrivingHazardousSubstances;
         }
 
-        public int GetGasolineType()
+        public GasolineEngine.eFuelTypes GetGasolineType()
         {
+            int gasolineType = int.MinValue;
             Console.WriteLine(@"
 Please select gasoline type:
 1) Soler 
 2) Octan95
 3) Octan96
 4) Octan98");
-            int gasolineType = GetChoiceFromUser(4);
-            return gasolineType;
+            gasolineType = GetChoiceFromUser(4);
+            return (GasolineEngine.eFuelTypes)gasolineType;
         }
 
         public int GetChoiceFromUser( int i_UpperRange)

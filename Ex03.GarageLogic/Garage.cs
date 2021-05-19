@@ -163,7 +163,7 @@ namespace Ex03.GarageLogic
             return vehiclelExsist;
         }
 
-        public StringBuilder GetVehicleData(string i_NumberLicense)
+        public string GetVehicleData(string i_NumberLicense)
         {
             StringBuilder vehicleData = new StringBuilder();
             // if key not found throw KeyNotFoundException
@@ -178,11 +178,11 @@ namespace Ex03.GarageLogic
                 }
                 vehicleData.Append(data[1]);
             }
-            catch(KeyNotFoundException knfe)
+            catch(KeyNotFoundException)
             {
                 throw new KeyNotFoundException("licence plate not found in garge");
             }
-            return vehicleData;
+            return vehicleData.ToString();
         }
 
         public enum eVehicleCondition
