@@ -132,8 +132,7 @@ namespace Ex03.ConsoleUI
                             string licenseNumber = string.Empty;
                             while (keepTryGetValidInput)
                             {
-                                Console.WriteLine("Please enter number license:");
-                                licenseNumber = Console.ReadLine();
+                                licenseNumber = m_Service.GetLicenseNumber();
                                 try
                                 {
                                     Console.WriteLine(m_Garage.GetVehicleData(licenseNumber));
