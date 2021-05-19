@@ -31,13 +31,17 @@ namespace Ex03.GarageLogic
 
         public StringBuilder GetVehiclesList(eVehicleCondition i_FilterByCondition)
         {
-            StringBuilder vehiclesList = new StringBuilder();
+            StringBuilder vehiclesList = new StringBuilder(string.Empty);
             foreach (KeyValuePair<string, List<object>> vehicle in m_VechilesData)
             {
                 if ((eVehicleCondition)vehicle.Value[1] == i_FilterByCondition)
                 {
                     vehiclesList.Append(vehicle.Key + Environment.NewLine);
                 }
+            }
+            if (vehiclesList.ToString() == string.Empty)
+            {
+                vehiclesList.Append("No vehicle in the garage");
             }
             return vehiclesList;
         }

@@ -19,8 +19,8 @@ namespace Ex03.ConsoleUI
 4) Inflate the wheels to max.
 5) Refuel vehicle.
 6) Charge an electric vehicle.
-7) Display all vehicle information .
-8) exit.");
+7) Display all vehicle information.
+8) Exit.");
         }
 
 
