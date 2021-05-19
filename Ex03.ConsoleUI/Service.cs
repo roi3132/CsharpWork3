@@ -232,6 +232,7 @@ Please select gasoline type:
                 try
                 {
                     userInput = int.Parse(userInputStr);
+                    invalidChoice = false;
                 }
                 catch (ArgumentNullException ane)
                 {
