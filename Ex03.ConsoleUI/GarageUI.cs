@@ -110,12 +110,12 @@ namespace Ex03.ConsoleUI
                             Console.Clear();
                             break;
                         }
-                    case (int)eUserChoice.InflateWheels:
+                    case (int)eUserChoice.InflateWheels: /*fix */
                         {
                             string licenseNumber = string.Empty;
 
                             Console.Clear();
-                            licenseNumber = m_Service.GetLicenseNumberFromUserUntilFoundInGarage(m_Garage);
+                            licenseNumber = m_Service.GetLicenseNumber();
                             m_Garage.InflateWheel(licenseNumber); 
                             Console.Clear();
                             Console.WriteLine("air for vehicle {0} inflate to the Max", licenseNumber);
@@ -183,23 +183,39 @@ namespace Ex03.ConsoleUI
                         }
                     case (int)eUserChoice.DisplayFullVehicleData:
                         {
+                            /*  string licenseNumber = string.Empty;
+                             while (keepTryGetValidInput)
+                             {
+                                 licenseNumber = m_Service.GetLicenseNumber();
+
+                                 if (keepTryGetValidInput)
+                                 {
+                                     Console.WriteLine("licence number not found, please try again with other number");
+                                 }
+                             }
+                                  StringBuilder result = m_Garage.GetVehicleData(licenseNumber);
+                                  keepTryGetValidInput = false;
+                                  Console.WriteLine(result.ToString());
+
+                             */
+                            bool keepTryingToPrint = true;
+
                             Console.Clear();
-                            bool keepTryGetValidInput = true;
-                            string licenseNumber = string.Empty;
-                            while (keepTryGetValidInput)
+                            try
                             {
-                                licenseNumber = m_Service.GetLicenseNumber();
-                                keepTryGetValidInput = (!(m_Garage.IsVehicleExsist(licenseNumber)));
-                                if (keepTryGetValidInput)
-                                {
-                                    Console.WriteLine("licence number not found, please try again with other number");
-                                }
-                            }
+                                 string licenseNumber = m_Service.GetLicenseNumber();
                                  StringBuilder result = m_Garage.GetVehicleData(licenseNumber);
-                                 keepTryGetValidInput = false;
+                                 keepTryingToPrint = false;
                                  Console.WriteLine(result.ToString());
-                            
-                                  
+                            }
+                            catch (KeyNotFoundException knfe)
+                            {
+                                Console.WriteLine(knfe.Message.ToString());
+                                Console.WriteLine("going back to main menu");
+                                keepTryingToPrint = false;
+                                   
+                            }
+
                             break;
                         }
                     case (int)eUserChoice.Exit:

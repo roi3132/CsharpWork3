@@ -170,7 +170,7 @@ namespace Ex03.GarageLogic
             }
             catch(KeyNotFoundException knfe)
             {
-                throw new ArgumentException("licence plate not found", i_NumberLicense, knfe);
+                throw new KeyNotFoundException("licence plate not found in garge");
             }
             return vehicleData;
         }
