@@ -14,13 +14,13 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine(
     @"Choose your option:(1-7)
-1) Put new vehicle.
-2) Display numbers license.
-3) Setting the vehicle condition.
-4) Inflate the wheels to max.
+1) Enter new vehicle to the Garge.
+2) Display vehicels that at the garage by license number.
+3) Change the vehicle condition.
+4) Inflate vehicle wheels to the max max.
 5) Refuel vehicle.
 6) Charge an electric vehicle.
-7) Display all vehicle information.
+7) Display all the vehicle information.
 8) Exit.");
         }
 
