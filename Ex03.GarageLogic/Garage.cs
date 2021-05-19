@@ -88,7 +88,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new KeyNotFoundException("no car with this license plate");
+                throw new KeyNotFoundException("no car with this license plate in the gargae");
             }
             return vehiclelExsist;
         }
