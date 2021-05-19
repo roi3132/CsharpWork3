@@ -32,8 +32,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Model:{0} License number:{1} Energy left:{2}% {3}", m_ModelName, m_LicenseNumber,
-                m_PercentageOfEnergyLeft, m_ListOfWheels[0].ToString());
+            return string.Format(@"
+Model:{0} 
+License number:{1} 
+Energy left:{2}%", m_ModelName, m_LicenseNumber,m_PercentageOfEnergyLeft, m_ListOfWheels[0].ToString());
         }
 
         public enum eVehicleType

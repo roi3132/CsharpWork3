@@ -31,7 +31,9 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString() + string.Format("Remaining battery time:{0} Max battery time:{1}");
+            return base.ToString() + string.Format(@"
+Remaining battery time:{0} 
+Max battery time:{1}",m_RemainingBatteryTime,m_MaxBatteryTime);
         }
     }
 }

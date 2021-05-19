@@ -123,10 +123,13 @@ namespace Ex03.GarageLogic
             try
             {
                 List<object> data = m_VechilesData[i_NumberLicense];
+                vehicleData.Append(data[2]);
+                vehicleData.Append(data[3]);
                 foreach (object o in data)
                 {
                     vehicleData.Append(o.ToString());
                 }
+                vehicleData.Append(data[1]);
             }
             catch(KeyNotFoundException knfe)
             {

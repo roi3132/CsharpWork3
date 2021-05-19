@@ -19,7 +19,7 @@ namespace Ex03.ConsoleUI
 4) Inflate the wheels to max.
 5) Refuel vehicle.
 6) Charge an electric vehicle.
-7) Display all vehicle datas.
+7) Display all vehicle information .
 8) exit.");
         }
 
@@ -32,7 +32,7 @@ Please select vehicle type (1-3):
 2) Motorcycle 
 3) Truck");
 
-            int vehicleType = GetChoiceFromUser(1, 3);
+            int vehicleType = GetChoiceFromUser(3);
             return vehicleType;
         }
 
@@ -105,7 +105,7 @@ Please select vehicle type (1-3):
 You want to filter the results by the condition of the vehicle in garage?
 1) Yes
 2) No");
-            int hasFiltering = GetChoiceFromUser(1, 2);
+            int hasFiltering = GetChoiceFromUser(2);
             return hasFiltering;
         }
 
@@ -116,7 +116,7 @@ Condition:
 1) in repair
 2) Fixed 
 3) Paid");
-            int filter = GetChoiceFromUser(1, 3);
+            int filter = GetChoiceFromUser(3);
             return filter;
         }
 
@@ -126,7 +126,7 @@ Condition:
 Please select engine type:
 1) Gasolin
 2) Electric");
-            int engineType = GetChoiceFromUser(1, 2);
+            int engineType = GetChoiceFromUser(2);
             return engineType;
         }
 
@@ -138,7 +138,7 @@ Please select type of color:
 2) Silver
 3) White
 4) Black");
-            int color = GetChoiceFromUser(1, 4);
+            int color = GetChoiceFromUser(4);
             return color;
         }
 
@@ -147,11 +147,11 @@ Please select type of color:
             Console.WriteLine(@"
 Please select number of doors:
 1) Two
-2) Tree
+2) Three
 3) Four
 4) Five");
 
-            int numOfDoors = GetChoiceFromUser(1, 4);
+            int numOfDoors = GetChoiceFromUser(4);
             return numOfDoors;
         }
 
@@ -163,7 +163,7 @@ Please select License type:
 2) B1
 3) AA
 4) BB");
-            int licenseType = GetChoiceFromUser(1, 4);
+            int licenseType = GetChoiceFromUser(4);
             return licenseType;
         }
 
@@ -174,7 +174,7 @@ Please select if Is Driving Hazardous Substances:
 1) Yes
 2) No");
             bool isDrivingHazardousSubstances = false;
-            if (GetChoiceFromUser(1, 2) == 1)
+            if (GetChoiceFromUser(2) == 1)
             {
                 isDrivingHazardousSubstances = true;
             }
@@ -189,11 +189,11 @@ Please select gasoline type:
 2) Octan95
 3) Octan96
 4) Octan98");
-            int gasolineType = GetChoiceFromUser(1, 4);
+            int gasolineType = GetChoiceFromUser(4);
             return gasolineType;
         }
 
-        public int GetChoiceFromUser(int i_LowerRange, int i_UpperRange)
+        public int GetChoiceFromUser( int i_UpperRange)
         {
             bool invalidChoice = true;
             string userInputStr = string.Empty;
@@ -204,7 +204,7 @@ Please select gasoline type:
                 try
                 {
                     userInput = int.Parse(userInputStr);
-                    if (userInput <= i_UpperRange && userInput >= i_LowerRange)
+                    if (userInput <= i_UpperRange && userInput >= 1)
                     {
                         invalidChoice = false;
                     }

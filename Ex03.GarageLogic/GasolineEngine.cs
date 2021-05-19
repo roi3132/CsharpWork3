@@ -36,6 +36,7 @@ namespace Ex03.GarageLogic
                 if (i_FuelType == m_FuelType)
                 {
                     m_CurrentAmountOfFuel += i_LitersToRefuel;
+                    
                 }
                 else 
                 {
@@ -55,8 +56,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString() + string.Format("Fuel type:{0} Current amount of fuel:{1} Max amount of fuel:{2}",
-                m_FuelType,m_CurrentAmountOfFuel,m_MaxAmountOfFuel);
+            return base.ToString() + string.Format(@"
+Fuel type:{0} 
+Current amount of fuel:{1} 
+Max amount of fuel:{2}", m_FuelType,m_CurrentAmountOfFuel,m_MaxAmountOfFuel);
         }
 
         public enum eFuelTypes

@@ -34,8 +34,9 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString() + string.Format("Is driving hazardous substances:{0} MaximumCarryingWeight{1}",
-                m_IsDrivingHazardousSubstances, m_MaxCarryingWeight);
+            return base.ToString() + string.Format(@"
+Is driving hazardous substances:{0}
+MaximumCarryingWeight{1}", m_IsDrivingHazardousSubstances, m_MaxCarryingWeight);
         }
     }
 }

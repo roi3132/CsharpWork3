@@ -50,7 +50,9 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString() + string.Format("License type:{0} Engine capacity{1}",
+            return base.ToString() + string.Format(@"
+License type:{0} 
+Engine capacity{1}",
                 m_LicenseType,m_EngineCapacity);
         }
     }
