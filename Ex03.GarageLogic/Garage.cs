@@ -53,6 +53,10 @@ namespace Ex03.GarageLogic
             {
                 NumberLicenseList.Append(vehicle.Key + Environment.NewLine);
             }
+            if (NumberLicenseList.ToString() == string.Empty)
+            {
+                NumberLicenseList.Append("No vehicle in the garage");
+            }
             return NumberLicenseList;
         }
 

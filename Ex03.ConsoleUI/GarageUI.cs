@@ -163,7 +163,6 @@ namespace Ex03.ConsoleUI
                                 {
                                     string licenseNumber = m_Service.GetLicenseNumber();
                                     int minutesToCharge = m_Service.GetMinutesToCharge();
-                                    int gasolineType = m_Service.GetGasolineType();
                                     m_Garage.ChargeVehicle(licenseNumber, minutesToCharge); 
                                     keepTryingToCharge = false;
                                 }
