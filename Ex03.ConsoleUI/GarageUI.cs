@@ -88,29 +88,45 @@ namespace Ex03.ConsoleUI
                         }
                     case (int)eUserChoice.DisplayLicenseNumbers:
                         {
-                            Console.Clear();
                             int hasFiltering = m_Service.GetHasFiltering();
                             if (hasFiltering == 1)
                             {
                                 int filter = m_Service.GetCondition();
+                                Console.Clear();
                                 Console.WriteLine(m_Garage.GetVehiclesList((Garage.eVehicleCondition)filter));
                             }
                             else
                             {
+                                Console.Clear();
                                 Console.WriteLine(m_Garage.GetVehiclesList());
                             }
                             break;
                         }
                     case (int)eUserChoice.SetVehicleStatus:
                         {
+                            string licenseNumber = string.Empty;
+                            int condition = -1;
+
                             Console.Clear();
-                            string licenseNumber = m_Service.GetLicenseNumber();
-                            int condition = m_Service.GetCondition();
-                            m_Garage.UpdateCondition(licenseNumber, (Garage.eVehicleCondition)condition); // exeption
-                            Console.Clear();
+                            Console.WriteLine("changing vehicle status:");
+                            try
+                            {
+                                licenseNumber = m_Service.GetLicenseNumber();
+                                condition = m_Service.GetCondition();
+                                m_Garage.UpdateCondition(licenseNumber, (Garage.eVehicleCondition)condition);
+                                Console.WriteLine("status for vehicle number : {0} have been updated to: {1}", licenseNumber, ((Garage.eVehicleCondition)condition).ToString());
+                            }
+                            catch (KeyNotFoundException knfe)
+                            {
+                                Console.WriteLine(knfe.Message.ToString());
+                                Console.WriteLine("going back to main menu");
+
+                            }
+
+                            break;
                             break;
                         }
-                    case (int)eUserChoice.InflateWheels: /*fix */
+                    case (int)eUserChoice.InflateWheels:
                         {
                             string licenseNumber = string.Empty;
 

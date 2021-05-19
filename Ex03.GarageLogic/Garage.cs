@@ -31,7 +31,9 @@ namespace Ex03.GarageLogic
 
         public StringBuilder GetVehiclesList(eVehicleCondition i_FilterByCondition)
         {
+            StringBuilder stringHeader = new StringBuilder("list of car license plate that in the garage" + Environment.NewLine);
             StringBuilder vehiclesList = new StringBuilder(string.Empty);
+
             foreach (KeyValuePair<string, List<object>> vehicle in m_VechilesData)
             {
                 if ((eVehicleCondition)vehicle.Value[1] == i_FilterByCondition)
@@ -43,12 +45,17 @@ namespace Ex03.GarageLogic
             {
                 vehiclesList.Append("No vehicle in the garage");
             }
+
+            stringHeader.Append(vehiclesList);
+            vehiclesList = stringHeader;
             return vehiclesList;
         }
 
         public StringBuilder GetVehiclesList()
         {
+            StringBuilder stringHeader = new StringBuilder("list of car license plate that in the garage" + Environment.NewLine);
             StringBuilder NumberLicenseList = new StringBuilder(string.Empty);
+
             foreach (KeyValuePair<string, List<object>> vehicle in m_VechilesData)
             {
                 NumberLicenseList.Append(vehicle.Key + Environment.NewLine);
@@ -57,20 +64,23 @@ namespace Ex03.GarageLogic
             {
                 NumberLicenseList.Append("No vehicle in the garage");
             }
+            stringHeader.Append(NumberLicenseList);
+            NumberLicenseList = stringHeader;
             return NumberLicenseList;
         }
 
         public bool UpdateCondition(string i_NumberLicense, eVehicleCondition i_Condition)
         {
             bool vehiclelExsist = true;
-            if (m_VechilesData.ContainsKey(i_NumberLicense))
+            try
             {
                 m_VechilesData[i_NumberLicense][1] = i_Condition;
             }
-            else
+            catch(KeyNotFoundException)
             {
-                vehiclelExsist = false;
+                throw new KeyNotFoundException("there is no car with this license number in the gargae");
             }
+          
             return vehiclelExsist;
         }
 
