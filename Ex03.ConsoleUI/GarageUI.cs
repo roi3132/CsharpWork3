@@ -148,6 +148,7 @@ namespace Ex03.ConsoleUI
                                 {
                                     StringBuilder result = m_Garage.GetVehicleData(licenseNumber);
                                     keepTryGetValidInput = false;
+                                    Console.WriteLine(result.ToString());
                                 }
                                 catch (ArgumentException ae)
                                 {

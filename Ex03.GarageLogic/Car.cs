@@ -47,7 +47,7 @@ namespace Ex03.GarageLogic
 
         public enum eColorsType
         {
-            Red,
+            Red = 1,
             White,
             Black,
             Silver
@@ -55,7 +55,7 @@ namespace Ex03.GarageLogic
 
         public enum eDoorsType
         {
-            Two,
+            Two = 1,
             Three,
             Four,
             Five
