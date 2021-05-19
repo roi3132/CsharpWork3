@@ -13,19 +13,22 @@ namespace Ex03.GarageLogic
 
         public ElectricEngine( float i_MaxBatteryTime)
         {
-            m_MaxBatteryTime = i_MaxBatteryTime;
-            m_RemainingBatteryTime = 0;
+            MaxBatteryTime = i_MaxBatteryTime;
+            RemainingBatteryTime = 0;
         }
+
+        public float RemainingBatteryTime { get => m_RemainingBatteryTime; set => m_RemainingBatteryTime = value; }
+        public float MaxBatteryTime { get => m_MaxBatteryTime; set => m_MaxBatteryTime = value; }
 
         public void BatteryCharging(float i_TimeToCharge)
         {
-            if (m_RemainingBatteryTime + i_TimeToCharge < m_MaxBatteryTime)
+            if (RemainingBatteryTime + i_TimeToCharge < MaxBatteryTime)
             {
-                m_RemainingBatteryTime += i_TimeToCharge;
+                RemainingBatteryTime += i_TimeToCharge;
             }
             else
             {
-                throw new ValueOutOfRangeException(0, m_MaxBatteryTime);
+                throw new ValueOutOfRangeException(0, (MaxBatteryTime - RemainingBatteryTime));
             }
         }
 
@@ -33,7 +36,7 @@ namespace Ex03.GarageLogic
         {
             return base.ToString() + string.Format(@"
 Remaining battery time:{0} 
-Max battery time:{1}",m_RemainingBatteryTime,m_MaxBatteryTime);
+Max battery time:{1}",RemainingBatteryTime,MaxBatteryTime);
         }
     }
 }

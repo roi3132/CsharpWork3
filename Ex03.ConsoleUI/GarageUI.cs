@@ -69,6 +69,7 @@ namespace Ex03.ConsoleUI
                                         Motorcycle motorcycle = new Motorcycle(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
                                         motorcycle.LicenseType = (Motorcycle.eLicenseType)licenseType;
                                         motorcycle.EngineCapacity = engineCapacity;
+                                        m_Garage.InsertNewVehicle(motorcycle, ownerName, ownerPhone);
                                         break;
                                     }
                                 case (int)Vehicles.eVehicleType.Truck:
@@ -78,6 +79,7 @@ namespace Ex03.ConsoleUI
                                         Truck truck = new Truck(modelName, licenseNumber, manufacturerName, Engine.eEngineType.Gasolin);
                                         truck.IsDrivingHazardousSubstances = isDrivingHazardousSubstances;
                                         truck.MaxCarryingWeight = maxCarryingWeight;
+                                        m_Garage.InsertNewVehicle(truck, ownerName, ownerPhone);
                                         break;
                                     }
                             }
@@ -133,6 +135,7 @@ namespace Ex03.ConsoleUI
                                     int gasolineType = m_Service.GetGasolineType();
                                     m_Garage.RefuelVehicle(licenseNumber, (GasolineEngine.eFuelTypes)gasolineType,
                                    gasoilneAmount);
+                                    keepTryingToRefuel = false;
                                 }
                                 catch(ArgumentException ae)
                                 {
@@ -151,11 +154,32 @@ namespace Ex03.ConsoleUI
                         }
                     case (int)eUserChoice.ChargeBattery:
                         {
+                            bool keepTryingToCharge = true;
+
                             Console.Clear();
-                            string licenseNumber = m_Service.GetLicenseNumber();
-                            int minutesToCharge = m_Service.GetMinutesToCharge();
-                            m_Garage.ChargeVehicle(licenseNumber, minutesToCharge); //exeption
-                            Console.Clear();
+                            while (keepTryingToCharge)
+                            {
+                                try
+                                {
+                                    string licenseNumber = m_Service.GetLicenseNumber();
+                                    int minutesToCharge = m_Service.GetMinutesToCharge();
+                                    int gasolineType = m_Service.GetGasolineType();
+                                    m_Garage.ChargeVehicle(licenseNumber, minutesToCharge); 
+                                    keepTryingToCharge = false;
+                                }
+                                catch (ArgumentException ae)
+                                {
+                                    Console.WriteLine(ae.Message.ToString());
+                                    Console.WriteLine("please try again.");
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message.ToString());
+                                    Console.WriteLine("going back to main menu");
+                                    keepTryingToCharge = false;
+                                    break;
+                                }
+                            }
                             break;
                         }
                     case (int)eUserChoice.DisplayFullVehicleData:

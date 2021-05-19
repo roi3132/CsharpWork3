@@ -100,7 +100,7 @@ namespace Ex03.GarageLogic
                     Vehicles tempVehicle = m_VechilesData[i_NumberLicense][0] as Vehicles;
                     GasolineEngine currentGasolineVehicles = tempVehicle.Engine as GasolineEngine;
                     currentGasolineVehicles.Refueling(i_GasolineToFill, i_FuelTypes);
-                    //precent calc of ampunt of fuel
+                    //precent calc of ampunt of energy
                     tempVehicle.PercentageOfEnergyLeft = ((currentGasolineVehicles.CurrentAmountOfFuel * 100) / currentGasolineVehicles.MaxAmountOfFuel);
                 }
                 catch(NullReferenceException)
@@ -125,9 +125,22 @@ namespace Ex03.GarageLogic
 
             if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                Vehicles tempVehicle = m_VechilesData[i_NumberLicense][0] as Vehicles;
-                ElectricEngine currentElectricVehicles = tempVehicle.Engine as ElectricEngine;
-                currentElectricVehicles.BatteryCharging(i_MinutesToCharge);
+                try
+                {
+                    Vehicles tempVehicle = m_VechilesData[i_NumberLicense][0] as Vehicles;
+                    ElectricEngine currentElectricVehicles = tempVehicle.Engine as ElectricEngine;
+                    currentElectricVehicles.BatteryCharging(i_MinutesToCharge);
+                    //precent calc of ampunt of fuel
+                    tempVehicle.PercentageOfEnergyLeft = ((currentElectricVehicles.RemainingBatteryTime * 100) / currentElectricVehicles.MaxBatteryTime);
+                }
+                catch (NullReferenceException)
+                {
+                    throw new NullReferenceException("the car is gas power and you try to put charge  it, please refuel insted");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
             else
             {
