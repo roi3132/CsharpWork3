@@ -95,12 +95,26 @@ namespace Ex03.GarageLogic
            
             if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                GasolineEngine currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as GasolineEngine;
-                currentGasolineVehicles.Refueling(i_GasolineToFill, i_FuelTypes);
+                try
+                {
+                    Vehicles tempVehicle = m_VechilesData[i_NumberLicense][0] as Vehicles;
+                    GasolineEngine currentGasolineVehicles = tempVehicle.Engine as GasolineEngine;
+                    currentGasolineVehicles.Refueling(i_GasolineToFill, i_FuelTypes);
+                    //precent calc of ampunt of fuel
+                    tempVehicle.PercentageOfEnergyLeft = ((currentGasolineVehicles.CurrentAmountOfFuel * 100) / currentGasolineVehicles.MaxAmountOfFuel);
+                }
+                catch(NullReferenceException)
+                {
+                    throw new NullReferenceException("the car is Elcetric power and you try to put fuel in it, please recharge insted");
+                }
+                catch(Exception e)
+                {
+                    throw e;
+                }
             }
             else
             {
-                vehiclelExsist = false;
+                throw new KeyNotFoundException("no vehichle with this license number in garage");
             }
             return vehiclelExsist;
         }
@@ -108,14 +122,16 @@ namespace Ex03.GarageLogic
         public bool ChargeVehicle(string i_NumberLicense, int i_MinutesToCharge)
         {
             bool vehiclelExsist = true;
+
             if (m_VechilesData.ContainsKey(i_NumberLicense))
             {
-                ElectricEngine currentGasolineVehicles = m_VechilesData[i_NumberLicense][0] as ElectricEngine;
-                currentGasolineVehicles.BatteryCharging(i_MinutesToCharge);
+                Vehicles tempVehicle = m_VechilesData[i_NumberLicense][0] as Vehicles;
+                ElectricEngine currentElectricVehicles = tempVehicle.Engine as ElectricEngine;
+                currentElectricVehicles.BatteryCharging(i_MinutesToCharge);
             }
             else
             {
-                vehiclelExsist = false;
+                throw new KeyNotFoundException("no vehichle with this license number in garage");
             }
             return vehiclelExsist;
         }

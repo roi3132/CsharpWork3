@@ -27,11 +27,11 @@ namespace Ex03.GarageLogic
             m_LicenseNumber = i_LicenseNumber;
             if (i_EngineType == Engine.eEngineType.Gasolin)
             {
-                m_Engine = new GasolineEngine(k_FuelType, k_MaxAmountOfFuel);
+                Engine = new GasolineEngine(k_FuelType, k_MaxAmountOfFuel);
             }
             else if (i_EngineType == Engine.eEngineType.Electric) 
             {
-                m_Engine = new ElectricEngine(K_MaxBatteryTime);
+                Engine = new ElectricEngine(K_MaxBatteryTime);
             }
 
             m_ListOfWheels = new Wheels[k_NumberOfWheels];

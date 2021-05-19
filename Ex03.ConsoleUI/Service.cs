@@ -231,7 +231,7 @@ Please select gasoline type:
                         Console.WriteLine("Invalid input. plese enter number acoording to the menu options.");
                     }
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     Console.WriteLine("invalide input. please enter only numbers and try again.");
                 }
@@ -252,11 +252,11 @@ Please select gasoline type:
                     userInput = int.Parse(userInputStr);
                     invalidChoice = false;
                 }
-                catch (ArgumentNullException ane)
+                catch (ArgumentNullException)
                 {
                     Console.WriteLine("You did not type anything. Please try again");
                 }
-                catch (FormatException fe)
+                catch (FormatException )
                 {
                     Console.WriteLine("Invalide input. please enter only numbers and try again");
                 }

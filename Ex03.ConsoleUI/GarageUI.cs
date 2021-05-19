@@ -121,13 +121,32 @@ namespace Ex03.ConsoleUI
                         }
                     case (int)eUserChoice.FillGasolin:
                         {
+                            bool keepTryingToRefuel = true;
+
                             Console.Clear();
-                            string licenseNumber = m_Service.GetLicenseNumber();
-                            float gasoilneAmount = m_Service.GetGasoilneAmount();
-                            int gasolineType = m_Service.GetGasolineType();
-                            m_Garage.RefuelVehicle(licenseNumber, (GasolineEngine.eFuelTypes)gasolineType,
-                               gasoilneAmount); //exeption
-                            Console.Clear();
+                            while (keepTryingToRefuel)
+                            {
+                                try
+                                {
+                                    string licenseNumber = m_Service.GetLicenseNumber();
+                                    float gasoilneAmount = m_Service.GetGasoilneAmount();
+                                    int gasolineType = m_Service.GetGasolineType();
+                                    m_Garage.RefuelVehicle(licenseNumber, (GasolineEngine.eFuelTypes)gasolineType,
+                                   gasoilneAmount);
+                                }
+                                catch(ArgumentException ae)
+                                {
+                                    Console.WriteLine(ae.Message.ToString());
+                                    Console.WriteLine("please try again.");
+                                }
+                                catch(Exception e)
+                                {
+                                    Console.WriteLine(e.Message.ToString());
+                                    Console.WriteLine("going back to main menu");
+                                    keepTryingToRefuel = false;
+                                    break;
+                                }
+                            }
                             break;
                         }
                     case (int)eUserChoice.ChargeBattery:
