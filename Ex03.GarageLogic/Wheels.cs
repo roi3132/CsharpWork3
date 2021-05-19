@@ -21,16 +21,16 @@ namespace Ex03.GarageLogic
 
         public void InflatingWheel(float i_AirPressure)
         {
-            if (i_AirPressure + m_CurrentAirPressure < m_MaxAirPressure)
+            if (i_AirPressure + m_CurrentAirPressure <= m_MaxAirPressure)
             {
                 m_CurrentAirPressure += i_AirPressure;
             }
             else
             {
-                throw new ValueOutOfRangeException(m_MaxAirPressure, GetMinAirPressure());
+                throw new ValueOutOfRangeException(m_MaxAirPressure, GetAirPressureToAddTheMax());
             }
         }
-        public float GetMinAirPressure() 
+        public float GetAirPressureToAddTheMax() 
         {
             return m_MaxAirPressure - m_CurrentAirPressure;
         }

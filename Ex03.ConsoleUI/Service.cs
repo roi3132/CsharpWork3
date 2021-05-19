@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
@@ -55,6 +56,23 @@ Please select vehicle type (1-3):
             Console.WriteLine("Please enter model name:");
             string modelName = Console.ReadLine();
             return modelName;
+        }
+
+        public string GetLicenseNumberFromUserUntilFoundInGarage(Garage m_Garage)
+        {
+            string licenseNumber = string.Empty;
+            bool keepTryGetValidInput = true;
+
+            while (keepTryGetValidInput)
+            {
+                licenseNumber = GetLicenseNumber();
+                keepTryGetValidInput = (!(m_Garage.IsVehicleExsist(licenseNumber)));
+                if (keepTryGetValidInput)
+                {
+                    Console.WriteLine("licence number not found, please try again with other number");
+                }
+            }
+            return licenseNumber;
         }
 
         public string GetLicenseNumber()

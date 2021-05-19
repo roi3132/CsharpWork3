@@ -110,10 +110,13 @@ namespace Ex03.ConsoleUI
                         }
                     case (int)eUserChoice.InflateWheels:
                         {
+                            string licenseNumber = string.Empty;
+
                             Console.Clear();
-                            string licenseNumber = m_Service.GetLicenseNumber();
-                            m_Garage.InflateWheel(licenseNumber); //exeption
+                            licenseNumber = m_Service.GetLicenseNumberFromUserUntilFoundInGarage(m_Garage);
+                            m_Garage.InflateWheel(licenseNumber); 
                             Console.Clear();
+                            Console.WriteLine("air for vehicle {0} inflate to the Max", licenseNumber);
                             break;
                         }
                     case (int)eUserChoice.FillGasolin:
@@ -144,18 +147,17 @@ namespace Ex03.ConsoleUI
                             while (keepTryGetValidInput)
                             {
                                 licenseNumber = m_Service.GetLicenseNumber();
-                                try
+                                keepTryGetValidInput = (!(m_Garage.IsVehicleExsist(licenseNumber)));
+                                if (keepTryGetValidInput)
                                 {
-                                    StringBuilder result = m_Garage.GetVehicleData(licenseNumber);
-                                    keepTryGetValidInput = false;
-                                    Console.WriteLine(result.ToString());
-                                }
-                                catch (ArgumentException ae)
-                                {
-                                    keepTryGetValidInput = true;
                                     Console.WriteLine("licence number not found, please try again with other number");
                                 }
-                            }                 
+                            }
+                                 StringBuilder result = m_Garage.GetVehicleData(licenseNumber);
+                                 keepTryGetValidInput = false;
+                                 Console.WriteLine(result.ToString());
+                            
+                                  
                             break;
                         }
                     case (int)eUserChoice.Exit:

@@ -16,8 +16,8 @@ namespace Ex03.GarageLogic
         private eColorsType m_Color;
         private eDoorsType m_NumOfDoors;
 
-        public eColorsType Color { get; set; }
-        public eDoorsType NumOfDoors { get; set; }
+        public eColorsType Color { get => m_Color; set => m_Color = value; }
+        public eDoorsType NumOfDoors { get => m_NumOfDoors; set => m_NumOfDoors = value; }
 
         public Car(string i_ModelName, string i_LicenseNumber, string i_ManufacturerName
             , Engine.eEngineType i_EngineType)
@@ -64,8 +64,8 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return base.ToString() + string.Format(@"
-Color:{0}
-Num of doors:{1}",m_Color,m_NumOfDoors);
+Color: {0}
+Num of doors: {1}",Color,NumOfDoors);
         }
     }
 }

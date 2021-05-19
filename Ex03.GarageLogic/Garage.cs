@@ -78,13 +78,13 @@ namespace Ex03.GarageLogic
                 Vehicles v = m_VechilesData[i_NumberLicense][0] as Vehicles;
                 foreach (Wheels wheel in v.Wheels)
                 {
-                    float pressureToFill = wheel.GetMinAirPressure();
+                    float pressureToFill = wheel.GetAirPressureToAddTheMax();
                     wheel.InflatingWheel(pressureToFill);
                 }
             }
             else
             {
-                vehiclelExsist = false;
+                throw new KeyNotFoundException("no car with this license plate");
             }
             return vehiclelExsist;
         }
@@ -147,6 +147,22 @@ namespace Ex03.GarageLogic
             InRepair,
             Fixed,
             Paid
+        }
+
+        public bool IsVehicleExsist(string i_NumberLicense)
+        {
+            bool vehicleFound = false;
+
+            try
+            {
+                List<object> data = m_VechilesData[i_NumberLicense];
+                vehicleFound = true;
+            }
+            catch (KeyNotFoundException knfe)
+            {
+                vehicleFound = false;
+            }
+            return vehicleFound;
         }
     }
 }

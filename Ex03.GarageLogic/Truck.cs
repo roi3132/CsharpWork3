@@ -14,9 +14,8 @@ namespace Ex03.GarageLogic
         private const int k_NumberOfWheels = 16;
         private bool m_IsDrivingHazardousSubstances;
         private float m_MaxCarryingWeight;
-
-        public bool IsDrivingHazardousSubstances { get; set; }
-        public float MaxCarryingWeight { get; set; }
+        public bool IsDrivingHazardousSubstances1 { get => m_IsDrivingHazardousSubstances; set => m_IsDrivingHazardousSubstances = value; }
+        public float MaxCarryingWeight1 { get => m_MaxCarryingWeight; set => m_MaxCarryingWeight = value; }
 
         public Truck(string i_ModelName, string i_LicenseNumber, string i_ManufacturerName
             , Engine.eEngineType i_EngineType)
@@ -36,7 +35,7 @@ namespace Ex03.GarageLogic
         {
             return base.ToString() + string.Format(@"
 Is driving hazardous substances:{0}
-MaximumCarryingWeight{1}", m_IsDrivingHazardousSubstances, m_MaxCarryingWeight);
+MaximumCarryingWeight{1}", IsDrivingHazardousSubstances1, MaxCarryingWeight1);
         }
     }
 }

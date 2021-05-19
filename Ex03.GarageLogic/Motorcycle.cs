@@ -16,8 +16,8 @@ namespace Ex03.GarageLogic
         private eLicenseType m_LicenseType;
         private int m_EngineCapacity;
 
-        public eLicenseType LicenseType { get; set; }
-        public int EngineCapacity { get; set; }
+        public eLicenseType LicenseType1 { get => m_LicenseType; set => m_LicenseType = value; }
+        public int EngineCapacity1 { get => m_EngineCapacity; set => m_EngineCapacity = value; }
 
         public Motorcycle(string i_ModelName, string i_LicenseNumber, string i_ManufacturerName
             , Engine.eEngineType i_EngineType)
@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
             return base.ToString() + string.Format(@"
 License type:{0} 
 Engine capacity{1}",
-                m_LicenseType,m_EngineCapacity);
+                LicenseType1,EngineCapacity1);
         }
     }
 }
