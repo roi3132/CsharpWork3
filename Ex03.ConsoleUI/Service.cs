@@ -61,7 +61,7 @@ Please select vehicle type (1-3):
             return licenseNumber;
         }
 
-        public string GetManufacturerName()
+        public string GetWheelManufacturerName()
         {
             Console.WriteLine("Please enter wheel manufacturer name:");
             string manufacturerName = Console.ReadLine();

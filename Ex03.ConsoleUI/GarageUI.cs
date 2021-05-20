@@ -45,7 +45,7 @@
                             string ownerPhone = m_Service.GetOwnerPhone();
                             string modelName = m_Service.GetModelName();
                             string licenseNumber = m_Service.GetLicenseNumber();
-                            string manufacturerName = m_Service.GetManufacturerName();
+                            string wheelManufacturerName = m_Service.GetWheelManufacturerName();
 
                             Console.Clear();
                             switch (vehicleType)
@@ -56,7 +56,8 @@
                                         int color = m_Service.GetColorType();
                                         int numOfDoors = m_Service.GetNumOfDoors();
 
-                                        Car car = new Car(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
+                                        Car car =(Car)VehicleFactory.CreateVehicle((Vehicles.eVehicleType)vehicleType, (Engine.eEngineType)engineType,
+                                                                                   licenseNumber, modelName, wheelManufacturerName);
                                         car.Color = (Car.eColorsType)color;
                                         car.NumOfDoors = (Car.eDoorsType)numOfDoors;
                                         m_Garage.InsertNewVehicle(car, ownerName, ownerPhone);
@@ -69,7 +70,8 @@
                                         int licenseType = m_Service.GetLicenseType();
                                         int engineCapacity = m_Service.GetEngineCapacity();
 
-                                        Motorcycle motorcycle = new Motorcycle(modelName, licenseNumber, manufacturerName, (Engine.eEngineType)engineType);
+                                        Motorcycle motorcycle = (Motorcycle)VehicleFactory.CreateVehicle((Vehicles.eVehicleType)vehicleType, (Engine.eEngineType)engineType,
+                                                                                                          licenseNumber, modelName, wheelManufacturerName);
                                         motorcycle.LicenseType = (Motorcycle.eLicenseType)licenseType;
                                         motorcycle.EngineCapacity = engineCapacity;
                                         m_Garage.InsertNewVehicle(motorcycle, ownerName, ownerPhone);
@@ -80,7 +82,9 @@
                                     {
                                         bool isDrivingHazardousSubstances = m_Service.GetIsDrivingHazardousSubstances();
                                         float maxCarryingWeight = m_Service.GetMaxCarryingWeight();
-                                        Truck truck = new Truck(modelName, licenseNumber, manufacturerName, Engine.eEngineType.Gasolin);
+
+                                        Truck truck = (Truck)VehicleFactory.CreateVehicle((Vehicles.eVehicleType)vehicleType, (Engine.eEngineType.Gasolin),
+                                                                                                          licenseNumber, modelName, wheelManufacturerName);
                                         truck.IsDrivingHazardousSubstances = isDrivingHazardousSubstances;
                                         truck.MaxCarryingWeight = maxCarryingWeight;
                                         m_Garage.InsertNewVehicle(truck, ownerName, ownerPhone);
