@@ -40,7 +40,7 @@
             return base.ToString() + string.Format(
                 @"
 Is driving hazardous substances:{0}
-MaximumCarryingWeight{1}",
+Maximum Carry Weight:{1}",
                 IsDrivingHazardousSubstances,
                 MaxCarryingWeight);
         }

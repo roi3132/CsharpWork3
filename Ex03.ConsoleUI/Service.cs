@@ -2,7 +2,9 @@
 {
     using System;
     using Ex03.GarageLogic;
-
+    /// <summary>
+    /// The class serves the GarageUI
+    /// </summary>
     public class Service
     {
         public void GetDisplayMenu()

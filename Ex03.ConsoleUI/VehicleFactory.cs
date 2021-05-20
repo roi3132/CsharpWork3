@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
+    /// <summary>
+    /// The class produces a Vehicle type objects. 
+    /// </summary>
     public class VehicleFactory
     {
         public static Vehicles CreateVehicle(Vehicles.eVehicleType i_TypeOfVehicle,

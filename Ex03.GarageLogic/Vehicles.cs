@@ -39,7 +39,7 @@ License number:{1}
 Energy left:{2}%",
 m_ModelName,
 m_LicenseNumber,
-PercentageOfEnergyLeft) + m_ListOfWheels[0].ToString() + m_Engine.ToString() + m_ListOfWheels[0].ToString();
+PercentageOfEnergyLeft) + m_ListOfWheels[0].ToString() + m_Engine.ToString();
         }
 
         public enum eVehicleType

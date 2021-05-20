@@ -57,7 +57,7 @@
             return base.ToString() + string.Format(
                 @"
 License type:{0} 
-Engine capacity{1}",
+Engine capacity:{1}",
                 LicenseType,
                 EngineCapacity);
         }
