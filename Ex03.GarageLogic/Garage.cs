@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class Garage
     {
         private readonly Dictionary<string, List<object>> m_VechilesData;
@@ -26,6 +26,7 @@ namespace Ex03.GarageLogic
                 List<object> data = new List<object>() { i_Vehicles, eVehicleCondition.InRepair, i_OwnerName, i_Phone };
                 m_VechilesData.Add(i_Vehicles.LicenseNumber, data);
             }
+
             return !carIsInGarage;
         }
 
@@ -41,6 +42,7 @@ namespace Ex03.GarageLogic
                     vehiclesList.Append(vehicle.Key + Environment.NewLine);
                 }
             }
+
             if (vehiclesList.ToString() == string.Empty)
             {
                 vehiclesList.Append("No vehicle in the garage");
@@ -60,10 +62,12 @@ namespace Ex03.GarageLogic
             {
                 NumberLicenseList.Append(vehicle.Key + Environment.NewLine);
             }
+
             if (NumberLicenseList.ToString() == string.Empty)
             {
                 NumberLicenseList.Append("No vehicle in the garage");
             }
+
             stringHeader.Append(NumberLicenseList);
             NumberLicenseList = stringHeader;
             return NumberLicenseList;
@@ -76,7 +80,7 @@ namespace Ex03.GarageLogic
             {
                 m_VechilesData[i_NumberLicense][1] = i_Condition;
             }
-            catch(KeyNotFoundException)
+            catch (KeyNotFoundException)
             {
                 throw new KeyNotFoundException("there is no car with this license number in the gargae");
             }
@@ -100,6 +104,7 @@ namespace Ex03.GarageLogic
             {
                 throw new KeyNotFoundException("no car with this license plate in the gargae");
             }
+
             return vehiclelExsist;
         }
 
@@ -114,14 +119,13 @@ namespace Ex03.GarageLogic
                     Vehicles tempVehicle = m_VechilesData[i_NumberLicense][0] as Vehicles;
                     GasolineEngine currentGasolineVehicles = tempVehicle.Engine as GasolineEngine;
                     currentGasolineVehicles.Refueling(i_GasolineToFill, i_FuelTypes);
-                    //precent calc of ampunt of energy
-                    tempVehicle.PercentageOfEnergyLeft = ((currentGasolineVehicles.CurrentAmountOfFuel * 100) / currentGasolineVehicles.MaxAmountOfFuel);
+                    tempVehicle.PercentageOfEnergyLeft = (currentGasolineVehicles.CurrentAmountOfFuel * 100) / currentGasolineVehicles.MaxAmountOfFuel;
                 }
-                catch(NullReferenceException)
+                catch (NullReferenceException)
                 {
                     throw new NullReferenceException("the car is Elcetric power and you try to put fuel in it, please recharge insted");
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     throw e;
                 }
@@ -130,6 +134,7 @@ namespace Ex03.GarageLogic
             {
                 throw new KeyNotFoundException("no vehichle with this license number in garage");
             }
+
             return vehiclelExsist;
         }
 
@@ -144,8 +149,7 @@ namespace Ex03.GarageLogic
                     Vehicles tempVehicle = m_VechilesData[i_NumberLicense][0] as Vehicles;
                     ElectricEngine currentElectricVehicles = tempVehicle.Engine as ElectricEngine;
                     currentElectricVehicles.BatteryCharging(i_MinutesToCharge);
-                    //precent calc of ampunt of fuel
-                    tempVehicle.PercentageOfEnergyLeft = ((currentElectricVehicles.RemainingBatteryTime * 100) / currentElectricVehicles.MaxBatteryTime);
+                    tempVehicle.PercentageOfEnergyLeft = (currentElectricVehicles.RemainingBatteryTime * 100) / currentElectricVehicles.MaxBatteryTime;
                 }
                 catch (NullReferenceException)
                 {
@@ -160,13 +164,13 @@ namespace Ex03.GarageLogic
             {
                 throw new KeyNotFoundException("no vehichle with this license number in garage");
             }
+
             return vehiclelExsist;
         }
 
         public string GetVehicleData(string i_NumberLicense)
         {
             StringBuilder vehicleData = new StringBuilder();
-            // if key not found throw KeyNotFoundException
             try
             {
                 List<object> data = m_VechilesData[i_NumberLicense];
@@ -176,20 +180,15 @@ namespace Ex03.GarageLogic
                 {
                     vehicleData.Append(o.ToString());
                 }
+
                 vehicleData.Append(data[1]);
             }
-            catch(KeyNotFoundException)
+            catch (KeyNotFoundException)
             {
                 throw new KeyNotFoundException("licence plate not found in garge");
             }
-            return vehicleData.ToString();
-        }
 
-        public enum eVehicleCondition
-        {
-            InRepair,
-            Fixed,
-            Paid
+            return vehicleData.ToString();
         }
 
         public bool IsVehicleExsist(string i_NumberLicense)
@@ -205,7 +204,15 @@ namespace Ex03.GarageLogic
             {
                 vehicleFound = false;
             }
+
             return vehicleFound;
+        }
+
+        public enum eVehicleCondition
+        {
+            InRepair,
+            Fixed,
+            Paid
         }
     }
 }

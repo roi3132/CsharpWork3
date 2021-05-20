@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+
     public class Car : Vehicles
     {
         private const GasolineEngine.eFuelTypes k_FuelType = GasolineEngine.eFuelTypes.Octan95;
@@ -17,11 +13,18 @@ namespace Ex03.GarageLogic
         private eDoorsType m_NumOfDoors;
 
         public eColorsType Color { get => m_Color; set => m_Color = value; }
+
         public eDoorsType NumOfDoors { get => m_NumOfDoors; set => m_NumOfDoors = value; }
 
-        public Car(string i_ModelName, string i_LicenseNumber, string i_ManufacturerName
-            , Engine.eEngineType i_EngineType)
-                : base(i_ModelName, i_LicenseNumber, i_EngineType)
+        public Car(
+            string i_ModelName,
+            string i_LicenseNumber,
+            string i_ManufacturerName,
+            Engine.eEngineType i_EngineType)
+                : base(
+                      i_ModelName,
+                      i_LicenseNumber,
+                      i_EngineType)
         {
             m_ModelName = i_ModelName;
             m_LicenseNumber = i_LicenseNumber;
@@ -39,10 +42,6 @@ namespace Ex03.GarageLogic
             {
                 m_ListOfWheels[i] = new Wheels(i_ManufacturerName, k_MaxAirPressure);
             }
-        }
-        public void SetValueEngine() 
-        {
-            
         }
 
         public enum eColorsType
@@ -63,9 +62,12 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString() + string.Format(@"
+            return base.ToString() + string.Format(
+                @"
 Color: {0}
-Num of doors: {1}",Color,NumOfDoors);
+Num of doors: {1}",
+Color,
+NumOfDoors);
         }
     }
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+
     public class Wheels
     {
         private string m_ManufacturerName;
@@ -30,6 +26,7 @@ namespace Ex03.GarageLogic
                 throw new ValueOutOfRangeException(m_MaxAirPressure, GetAirPressureToAddTheMax());
             }
         }
+
         public float GetAirPressureToAddTheMax() 
         {
             return m_MaxAirPressure - m_CurrentAirPressure;
@@ -37,12 +34,14 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"
+            return string.Format(
+                @"
 Manufacturer name:{0}
 Current air pressure:{1}
-Max air pressure:{2}" ,m_ManufacturerName,m_CurrentAirPressure,m_MaxAirPressure); 
+Max air pressure:{2}",
+m_ManufacturerName,
+m_CurrentAirPressure,
+m_MaxAirPressure); 
         }
-
-
     }
 }

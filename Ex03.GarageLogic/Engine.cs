@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+
     public class Engine
     {
         private readonly Engine m_Engine;     
@@ -15,8 +11,5 @@ namespace Ex03.GarageLogic
             Gasolin = 1,
             Electric
         }  
-
-     
     }
-
 }

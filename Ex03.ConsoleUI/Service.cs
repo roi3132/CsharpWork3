@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ex03.GarageLogic;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
-    class Service
-    {
+    using System;
+    using Ex03.GarageLogic;
 
+    public class Service
+    {
         public void GetDisplayMenu()
         {
             Console.WriteLine(
@@ -23,7 +18,6 @@ namespace Ex03.ConsoleUI
 7) Display all the vehicle information.
 8) Exit.");
         }
-
 
         public int GetVehicleType() 
         {
@@ -179,6 +173,7 @@ Please select if Is Driving Hazardous Substances:
             {
                 isDrivingHazardousSubstances = true;
             }
+
             return isDrivingHazardousSubstances;
         }
 
@@ -195,7 +190,7 @@ Please select gasoline type:
             return (GasolineEngine.eFuelTypes)gasolineType;
         }
 
-        public int GetChoiceFromUser( int i_UpperRange)
+        public int GetChoiceFromUser(int i_UpperRange)
         {
             bool invalidChoice = true;
             string userInputStr = string.Empty;
@@ -220,6 +215,7 @@ Please select gasoline type:
                     Console.WriteLine("invalide input. please enter only numbers and try again.");
                 }
             }
+
             return userInput;
         }
 
@@ -240,11 +236,12 @@ Please select gasoline type:
                 {
                     Console.WriteLine("You did not type anything. Please try again");
                 }
-                catch (FormatException )
+                catch (FormatException)
                 {
                     Console.WriteLine("Invalide input. please enter only numbers and try again");
                 }
             }
+
             return userInput;
         }
     }

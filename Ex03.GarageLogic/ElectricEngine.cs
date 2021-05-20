@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
-    public class ElectricEngine: Engine
+    using System;
+
+    public class ElectricEngine : Engine
     {
         private float m_RemainingBatteryTime;
         private float m_MaxBatteryTime;
 
-        public ElectricEngine( float i_MaxBatteryTime)
+        public ElectricEngine(float i_MaxBatteryTime)
         {
             MaxBatteryTime = i_MaxBatteryTime;
             RemainingBatteryTime = 0;
         }
 
         public float RemainingBatteryTime { get => m_RemainingBatteryTime; set => m_RemainingBatteryTime = value; }
+
         public float MaxBatteryTime { get => m_MaxBatteryTime; set => m_MaxBatteryTime = value; }
 
         public void BatteryCharging(float i_TimeToCharge)
@@ -28,15 +25,18 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(0, (MaxBatteryTime - RemainingBatteryTime));
+                throw new ValueOutOfRangeException(0, MaxBatteryTime - RemainingBatteryTime);
             }
         }
 
         public override string ToString()
         {
-            return base.ToString() + string.Format(@"
+            return base.ToString() + string.Format(
+                @"
 Remaining battery time:{0} 
-Max battery time:{1}",RemainingBatteryTime,MaxBatteryTime);
+Max battery time:{1}",
+RemainingBatteryTime,
+MaxBatteryTime);
         }
     }
 }

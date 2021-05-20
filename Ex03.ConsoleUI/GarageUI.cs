@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ex03.GarageLogic;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
+    using System;
+    using System.Collections.Generic;
+    using Ex03.GarageLogic;
+
     public class UserInterface
     {
         private readonly Service m_Service;
@@ -62,9 +61,9 @@ namespace Ex03.ConsoleUI
                                         m_Garage.InsertNewVehicle(car, ownerName, ownerPhone);
                                         break;
                                     }
+
                                 case (int)Vehicles.eVehicleType.Motorcycle:
                                     {
-
                                         int engineType = m_Service.GetEngineType();
                                         int licenseType = m_Service.GetLicenseType();
                                         int engineCapacity = m_Service.GetEngineCapacity();
@@ -75,11 +74,11 @@ namespace Ex03.ConsoleUI
                                         m_Garage.InsertNewVehicle(motorcycle, ownerName, ownerPhone);
                                         break;
                                     }
+
                                 case (int)Vehicles.eVehicleType.Truck:
                                     {
                                         bool isDrivingHazardousSubstances = m_Service.GetIsDrivingHazardousSubstances();
                                         float maxCarryingWeight = m_Service.GetMaxCarryingWeight();
-
                                         Truck truck = new Truck(modelName, licenseNumber, manufacturerName, Engine.eEngineType.Gasolin);
                                         truck.IsDrivingHazardousSubstances = isDrivingHazardousSubstances;
                                         truck.MaxCarryingWeight = maxCarryingWeight;
@@ -87,13 +86,14 @@ namespace Ex03.ConsoleUI
                                         break;
                                     }
                             }
+
                             Console.Clear();
                             break;
                         }
+
                     case (int)eUserChoice.DisplayLicenseNumbers:
                         {
                             int hasFiltering = m_Service.GetHasFiltering();
-
                             if (hasFiltering == 1)
                             {
                                 int filter = m_Service.GetCondition();
@@ -105,13 +105,14 @@ namespace Ex03.ConsoleUI
                                 Console.Clear();
                                 Console.WriteLine(m_Garage.GetVehiclesList());
                             }
+
                             break;
                         }
+
                     case (int)eUserChoice.SetVehicleStatus:
                         {
                             string licenseNumber = string.Empty;
                             int condition = -1;
-
                             Console.Clear();
                             Console.WriteLine("changing vehicle status:");
                             try
@@ -125,16 +126,14 @@ namespace Ex03.ConsoleUI
                             {
                                 Console.WriteLine(knfe.Message.ToString());
                                 Console.WriteLine("going back to main menu");
-
                             }
 
                             break;
-                            break;
                         }
+
                     case (int)eUserChoice.InflateWheels:
                         {
                             string licenseNumber = string.Empty;
-
                             Console.Clear();
                             Console.WriteLine("infliting wheels to the max:");
                             try
@@ -153,15 +152,16 @@ namespace Ex03.ConsoleUI
                                 Console.WriteLine(e.Message.ToString());
                                 Console.WriteLine("some thing went wrong, going back to main menu");
                             }
+
                             break;
                         }
+
                     case (int)eUserChoice.FillGasolin:
                         {
                             bool keepTryingToRefuel = true;
                             string licenseNumber = string.Empty;
                             float gasoilneAmount = float.MinValue;
                             GasolineEngine.eFuelTypes gasolineType = 0;
-
                             Console.Clear();
                             while (keepTryingToRefuel)
                             {
@@ -173,27 +173,27 @@ namespace Ex03.ConsoleUI
                                     m_Garage.RefuelVehicle(licenseNumber, gasolineType, gasoilneAmount);
                                     keepTryingToRefuel = false;
                                 }
-                                catch(ArgumentException ae)
+                                catch (ArgumentException ae)
                                 {
                                     Console.WriteLine(ae.Message.ToString());
                                     Console.WriteLine("please try again.");
                                 }
-                                catch(Exception e)
+                                catch (Exception e)
                                 {
                                     Console.WriteLine(e.Message.ToString());
-                                    Console.WriteLine("going back to main menu");
                                     keepTryingToRefuel = false;
                                     break;
                                 }
                             }
+
                             break;
                         }
+
                     case (int)eUserChoice.ChargeBattery:
                         {
                             bool keepTryingToCharge = true;
                             string licenseNumber = string.Empty;
                             int minutesToCharge = 0;
-
                             Console.Clear();
                             while (keepTryingToCharge)
                             {
@@ -217,13 +217,14 @@ namespace Ex03.ConsoleUI
                                     break;
                                 }
                             }
+
                             break;
                         }
+
                     case (int)eUserChoice.DisplayFullVehicleData:
                         {
                             string licenseNumber = string.Empty;
                             string result = string.Empty;
-
                             Console.Clear();
                             try
                             {
@@ -234,20 +235,20 @@ namespace Ex03.ConsoleUI
                             catch (KeyNotFoundException knfe)
                             {
                                 Console.WriteLine(knfe.Message.ToString());
-                                Console.WriteLine("going back to main menu");
-                                   
+                                Console.WriteLine("going back to main menu");                                 
                             }
 
                             break;
                         }
+
                     case (int)eUserChoice.Exit:
                         {
                             m_Run = false;
                             break;
                         }
                 }
-            } while (m_Run);
+            } 
+            while (m_Run);
         }
     }
 }
-

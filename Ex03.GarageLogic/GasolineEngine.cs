@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
+    using System;
+
     public class GasolineEngine : Engine
     {
         private eFuelTypes m_FuelType;
         private float m_CurrentAmountOfFuel;
         private float m_MaxAmountOfFuel;
 
-        public GasolineEngine(eFuelTypes i_FuelType, float i_MaxAmountOfFuel)    
+        public enum eFuelTypes
+        {
+            Soler = 1,
+            Octan95,
+            Octan96,
+            Octan98
+        }
+
+        public GasolineEngine(eFuelTypes i_FuelType, float i_MaxAmountOfFuel)
         {
             CurrentAmountOfFuel = 0;
             m_FuelType = i_FuelType;
@@ -25,6 +29,7 @@ namespace Ex03.GarageLogic
         }
 
         public float CurrentAmountOfFuel { get => m_CurrentAmountOfFuel; set => m_CurrentAmountOfFuel = value; }
+
         public float MaxAmountOfFuel { get => m_MaxAmountOfFuel; set => m_MaxAmountOfFuel = value; }
 
         public void Refueling(float i_LitersToRefuel, eFuelTypes i_FuelType)
@@ -33,8 +38,7 @@ namespace Ex03.GarageLogic
             {
                 if (i_FuelType == m_FuelType)
                 {
-                    CurrentAmountOfFuel += i_LitersToRefuel;
-                    
+                    CurrentAmountOfFuel += i_LitersToRefuel;           
                 }
                 else 
                 {
@@ -43,24 +47,20 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException( 0, (MaxAmountOfFuel - CurrentAmountOfFuel));
+                throw new ValueOutOfRangeException(0, MaxAmountOfFuel - CurrentAmountOfFuel);
             }      
         }
 
         public override string ToString()
         {
-            return base.ToString() + string.Format(@"
+            return base.ToString() + string.Format(
+                @"
 Fuel type:{0} 
 Current amount of fuel:{1} 
-Max amount of fuel:{2}", m_FuelType,CurrentAmountOfFuel,MaxAmountOfFuel);
-        }
-
-        public enum eFuelTypes
-        {
-            Soler = 1,
-            Octan95,
-            Octan96,
-            Octan98
+Max amount of fuel:{2}", 
+                m_FuelType,
+                CurrentAmountOfFuel,
+                MaxAmountOfFuel);
         }
     }
 }
