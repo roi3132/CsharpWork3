@@ -32,9 +32,7 @@
 
         public StringBuilder GetVehiclesList(eVehicleCondition i_FilterByCondition)
         {
-            StringBuilder stringHeader = new StringBuilder("list of car license plate that in the garage" + Environment.NewLine);
-            StringBuilder vehiclesList = new StringBuilder(string.Empty);
-
+            StringBuilder vehiclesList = new StringBuilder("list of car license plate that in the garage:" + Environment.NewLine);      
             foreach (KeyValuePair<string, List<object>> vehicle in m_VechilesData)
             {
                 if ((eVehicleCondition)vehicle.Value[1] == i_FilterByCondition)
@@ -48,8 +46,6 @@
                 vehiclesList.Append("No vehicle in the garage");
             }
 
-            stringHeader.Append(vehiclesList);
-            vehiclesList = stringHeader;
             return vehiclesList;
         }
 
@@ -206,7 +202,7 @@
 
         public enum eVehicleCondition
         {
-            InRepair,
+            InRepair = 1,
             Fixed,
             Paid
         }

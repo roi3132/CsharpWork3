@@ -35,6 +35,7 @@
             {
                 m_Service.GetDisplayMenu();
                 int userChoose = m_Service.GetChoiceFromUser(8);
+                Console.Clear();
                 switch (userChoose)
                 {
                     case (int)eUserChoice.InsertNewVehicle:
@@ -96,13 +97,11 @@
                             int hasFiltering = m_Service.GetHasFiltering();
                             if (hasFiltering == 1)
                             {
-                                int filter = m_Service.GetCondition();
-                                Console.Clear();
+                                int filter = m_Service.GetCondition();                               
                                 Console.WriteLine(m_Garage.GetVehiclesList((Garage.eVehicleCondition)filter));
                             }
                             else
                             {
-                                Console.Clear();
                                 Console.WriteLine(m_Garage.GetVehiclesList());
                             }
 
