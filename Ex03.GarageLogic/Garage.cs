@@ -78,7 +78,7 @@
             }
             catch (KeyNotFoundException)
             {
-                throw new KeyNotFoundException("there is no car with this license number in the gargae");
+                throw new KeyNotFoundException("there is no car with this license number in the gargae.");
             }
           
             return vehiclelExsist;

@@ -21,7 +21,7 @@
         {
             InsertNewVehicle = 1,
             DisplayLicenseNumbers,
-            SetVehicleStatus,
+            ChangeVehicleStatus,
             InflateWheels,
             FillGasolin,
             ChargeBattery,
@@ -97,7 +97,7 @@
                             int hasFiltering = m_Service.GetHasFiltering();
                             if (hasFiltering == 1)
                             {
-                                int filter = m_Service.GetCondition();                               
+                                int filter = m_Service.GetCondition();
                                 Console.WriteLine(m_Garage.GetVehiclesList((Garage.eVehicleCondition)filter));
                             }
                             else
@@ -108,7 +108,7 @@
                             break;
                         }
 
-                    case (int)eUserChoice.SetVehicleStatus:
+                    case (int)eUserChoice.ChangeVehicleStatus:
                         {
                             string licenseNumber = string.Empty;
                             int condition = -1;
@@ -117,8 +117,8 @@
                             try
                             {
                                 licenseNumber = m_Service.GetLicenseNumber();
-                                condition = m_Service.GetCondition();
                                 m_Garage.UpdateCondition(licenseNumber, (Garage.eVehicleCondition)condition);
+                                condition = m_Service.GetCondition();
                                 Console.WriteLine("status for vehicle number : {0} have been updated to: {1}", licenseNumber, ((Garage.eVehicleCondition)condition).ToString());
                             }
                             catch (KeyNotFoundException knfe)
@@ -200,7 +200,7 @@
                                 {
                                     licenseNumber = m_Service.GetLicenseNumber();
                                     minutesToCharge = m_Service.GetMinutesToCharge();
-                                    m_Garage.ChargeVehicle(licenseNumber, minutesToCharge); 
+                                    m_Garage.ChargeVehicle(licenseNumber, minutesToCharge);
                                     keepTryingToCharge = false;
                                 }
                                 catch (ArgumentException ae)
@@ -227,14 +227,14 @@
                             Console.Clear();
                             try
                             {
-                                 licenseNumber = m_Service.GetLicenseNumber();
-                                 result = m_Garage.GetVehicleData(licenseNumber);
-                                 Console.WriteLine(result);
+                                licenseNumber = m_Service.GetLicenseNumber();
+                                result = m_Garage.GetVehicleData(licenseNumber);
+                                Console.WriteLine(result);
                             }
                             catch (KeyNotFoundException knfe)
                             {
                                 Console.WriteLine(knfe.Message.ToString());
-                                Console.WriteLine("going back to main menu");                                 
+                                Console.WriteLine("going back to main menu");
                             }
 
                             break;
@@ -246,7 +246,7 @@
                             break;
                         }
                 }
-            } 
+            }
             while (m_Run);
         }
     }
