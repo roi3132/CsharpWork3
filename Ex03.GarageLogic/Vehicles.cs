@@ -6,8 +6,8 @@
     {
         protected string m_ModelName;
         protected string m_LicenseNumber;
-        private float percentageOfEnergyLeft;
-        private Engine engine;
+        private float m_PercentageOfEnergyLeft;
+        private Engine m_Engine;
         protected Wheels[] m_ListOfWheels;
 
         public Vehicles(string i_ModelName, string i_LicenseNumber, Engine.eEngineType i_EngineType)
@@ -26,9 +26,9 @@
             get { return m_LicenseNumber; }
         }
 
-        public Engine Engine { get => engine; set => engine = value; }
+        public Engine Engine { get => m_Engine; set => m_Engine = value; }
 
-        public float PercentageOfEnergyLeft { get => percentageOfEnergyLeft; set => percentageOfEnergyLeft = value; }
+        public float PercentageOfEnergyLeft { get => m_PercentageOfEnergyLeft; set => m_PercentageOfEnergyLeft = value; }
 
         public override string ToString()
         {
@@ -39,8 +39,7 @@ License number:{1}
 Energy left:{2}%",
 m_ModelName,
 m_LicenseNumber,
-PercentageOfEnergyLeft,
-m_ListOfWheels[0].ToString());
+PercentageOfEnergyLeft) + m_ListOfWheels[0].ToString() + m_Engine.ToString() + m_ListOfWheels[0].ToString();
         }
 
         public enum eVehicleType

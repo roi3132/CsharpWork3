@@ -170,25 +170,21 @@
 
         public string GetVehicleData(string i_NumberLicense)
         {
-            StringBuilder vehicleData = new StringBuilder();
+            StringBuilder vehicleDataStr = new StringBuilder();
             try
             {
-                List<object> data = m_VechilesData[i_NumberLicense];
-                vehicleData.Append(data[2]);
-                vehicleData.Append(data[3]);
-                foreach (object o in data)
-                {
-                    vehicleData.Append(o.ToString());
-                }
-
-                vehicleData.Append(data[1]);
+                List<object> vehicleData = m_VechilesData[i_NumberLicense];
+                vehicleDataStr.Append("Owner name:" + vehicleData[2] + Environment.NewLine);
+                vehicleDataStr.Append("Owner phone:" + vehicleData[3]);
+                vehicleDataStr.Append(vehicleData[0].ToString() + Environment.NewLine);
+                vehicleDataStr.Append("Vehicle condition:" + vehicleData[1] + Environment.NewLine);
             }
             catch (KeyNotFoundException)
             {
                 throw new KeyNotFoundException("licence plate not found in garge");
             }
 
-            return vehicleData.ToString();
+            return vehicleDataStr.ToString();
         }
 
         public bool IsVehicleExsist(string i_NumberLicense)
